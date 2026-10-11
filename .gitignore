@@ -1,0 +1,30 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+
+# env files: never commit real values, but keep the .env.example template
+.env*
+!.env.example
+
+# netlify
+.netlify
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
