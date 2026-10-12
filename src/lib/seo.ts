@@ -35,4 +35,4 @@ export function pageMetadata({
 }
 
 /** Pages listed in sitemap.xml. */
-export const sitemapPaths = ["/", "/privatumo-politika", "/naudojimo-salygos"] as const;
+export const sitemapPaths = ["/", "/privatumo-politika", "/naudojimo-salygos", "/duomenu-istrynimas"] as const;

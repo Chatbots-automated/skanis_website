@@ -50,6 +50,11 @@ export function Footer() {
                   Naudojimo sąlygos
                 </Link>
               </li>
+              <li>
+                <Link href="/duomenu-istrynimas" className="text-muted transition-colors hover:text-forest">
+                  Duomenų ištrynimas
+                </Link>
+              </li>
             </ul>
           </nav>
 
