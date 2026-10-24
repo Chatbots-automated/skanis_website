@@ -1,33 +1,23 @@
-export type FaqItem = { q: string; a: string; cta?: { label: string; href: string } };
-
-export const FAQ: readonly FaqItem[] = [
+/** Landing-page FAQ. Also rendered as FAQPage structured data, so keep answers plain text. */
+export const FAQ: Array<{ q: string; a: string }> = [
   {
-    q: "Kas yra Skanis?",
-    a: "Skanis yra mobilioji programėlė, padedanti greičiau perskaityti maisto produktų ingredientų sąrašą. Pasirenki alergenus, kuriuos nori stebėti, nufotografuoji etiketę, o Skanis parodo, kurie ingredientai atitinka tavo pasirinkimus. Šiuo metu programėlė yra testavimo versija ir dar tobulinama.",
+    q: "Kaip veikia Skanis?",
+    a: "Nufotografuoji ingredientų sąrašą ant pakuotės. Skanis perskaito tekstą, palygina jį su tavo pasirinktais filtrais ir parodo, ar produktas tinka, o jei ne – tiksliai kurie ingredientai neatitinka.",
   },
   {
-    q: "Kaip veikia ingredientų atpažinimas?",
-    a: "Nufotografavus ingredientų sąrašą, tekstas iš nuotraukos paverčiamas skaitmeniniu tekstu. Prieš tęsiant gali jį peržiūrėti ir ištaisyti akivaizdžias klaidas. Tada tekstas lyginamas su tavo pasirinktais alergenais pagal nustatytas taisykles: tas pats tekstas visada duoda tą patį rezultatą, o tu matai žodžius, dėl kurių jis gautas.",
+    q: "Ką Skanis gali patikrinti?",
+    a: "E priedus (po vieną arba visas grupes: dažiklius, konservantus, saldiklius, skonio stipriklius ir kt.), mitybos tipą (veganiška, vegetariška, be glitimo, be laktozės), gyvenimo būdo pasirinkimus (pridėtinis cukrus, palmių aliejus, kofeinas, alkoholis) ir 14 ES alergenų.",
   },
   {
-    q: "Ar Skanis gali aptikti visus alergenus?",
-    a: "Ne. Skanis ieško tik tavo pasirinktų alergenų ir tik tame tekste, kurį pavyko nuskaityti. Jei žodis neįskaitomas, sąrašas nutrūksta ar ingredientas užrašytas neįprastai, jis gali likti nepastebėtas. Todėl Skanis negali garantuoti, kad aptikti visi alergenai.",
+    q: "Ar reikia skenuoti brūkšninį kodą?",
+    a: "Ne. Skanis skaito pačią sudėtį nuo pakuotės, todėl veikia ir su produktais, kurių nėra jokioje duomenų bazėje.",
   },
   {
-    q: "Ar galima visiškai pasitikėti nuskaitymo rezultatu?",
-    a: "Rezultatą verta naudoti kaip pagalbinę priemonę, bet ne kaip vienintelį šaltinį. Teksto atpažinimo klaidos, neryški nuotrauka, pasikeitusi produkto receptūra ar kryžminės taršos įspėjimai gali paveikti rezultatą. Jei alergija sunki, visada patikrink originalią pakuotę, o abejodamas kreipkis į gamintoją ar gydytoją.",
+    q: "Kiek kainuoja ir kada galėsiu atsisiųsti?",
+    a: "Šiuo metu vyksta testavimas. Palik el. paštą ir pakviesime išbandyti, o netrukus Skanis bus App Store ir Google Play.",
   },
   {
-    q: "Ar programėlė jau prieinama?",
-    a: "Dar ne. Šiuo metu ruošiama testavimo versija, o Skanis nėra viešai prieinamas programėlių parduotuvėse. Kai atsiras vietų testavimui, parašysime užsiregistravusiems.",
+    q: "Ar Skanis pakeičia etiketės skaitymą?",
+    a: "Skanis padeda greičiau suprasti sudėtį, bet nėra medicininė rekomendacija. Jei turi alergiją ar kitų sveikatos apribojimų, visada patikrink originalią pakuotę.",
   },
-  {
-    q: "Kaip prisijungti prie testavimo?",
-    a: "Palik savo el. paštą registracijos formoje (jei nori, nurodyk ir telefono tipą: Android ar iPhone). Kai bus galima prisijungti, parašysime ir paaiškinsime, kaip įsidiegti testavimo versiją. Registracija nieko nekainuoja ir neįpareigoja.",
-    cta: { label: "Pereiti prie registracijos", href: "/#registracija" },
-  },
-  {
-    q: "Ar Skanis pakeičia originalios etiketės tikrinimą?",
-    a: "Ne. Skanis nepakeičia originalios etiketės patikros. Visada, ypač jei alergija sunki, perskaityk pakuotę pats. Skanis tik padeda greičiau pastebėti ingredientus, į kuriuos verta atkreipti dėmesį.",
-  },
-] satisfies readonly FaqItem[];
+];

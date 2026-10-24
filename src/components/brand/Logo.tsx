@@ -2,8 +2,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * The Skanis mark: a scan frame (two open brackets) around a check mark.
- * Drawn on the same 242 × 256 grid as the original logo artwork so the 3D
- * version in components/three/LogoMark3D.tsx can share the geometry.
+ * Drawn on the same 242 × 256 grid as the original logo artwork.
  */
 export const MARK_FRAME_PATH = "M9 75V35a20 20 0 0 1 20-20h184a20 20 0 0 1 20 20v40M9 181v40a20 20 0 0 0 20 20h184a20 20 0 0 0 20-20v-40";
 export const MARK_CHECK_PATH = "M70 130l36 38 92-103";

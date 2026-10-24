@@ -26,8 +26,8 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          Skanis padeda perskaityti maisto produkto ingredientų sąrašą ir palyginti jį su naudotojo pasirinktais alergenais bei mitybos
-          parinktimis. Tai informacinė pagalbinė priemonė.
+          Skanis padeda perskaityti maisto produkto ingredientų sąrašą ir palyginti jį su naudotojo pasirinktais kriterijais: E priedais,
+          mitybos tipu, gyvenimo būdo pasirinkimais ar alergenais. Tai informacinė pagalbinė priemonė.
         </p>
         <p>
           Skanis šiuo metu yra testavimo versija. Ji nėra viešai prieinama programėlių parduotuvėse, jos funkcijos gali keistis, o prieiga prie
@@ -38,7 +38,7 @@ const sections: LegalSection[] = [
   },
   {
     id: "ispejimas",
-    title: "3. Svarbus įspėjimas dėl alergenų",
+    title: "3. Svarbus įspėjimas dėl rezultatų",
     body: (
       <>
         <ul>
@@ -48,10 +48,10 @@ const sections: LegalSection[] = [
             Automatinis teksto atpažinimas gali klysti. Neryški nuotrauka, nutrūkęs sąrašas, smulkus šriftas, pasikeitusi produkto receptūra ar
             kryžminės taršos įspėjimai gali paveikti rezultatą.
           </li>
-          <li>Skanis ieško tik naudotojo pasirinktų alergenų ir tik nuskaitytame tekste.</li>
+          <li>Skanis ieško tik to, ką naudotojas pasirinko vengti (pavyzdžiui, E priedų, saldiklių ar alergenų), ir tik nuskaitytame tekste.</li>
           <li>
             Skanis nepakeičia originalios pakuotės etiketės. Prieš vartodami produktą visada perskaitykite originalią etiketę, ypač jei
-            alergija sunki.
+            turite alergiją ar kitų sveikatos apribojimų.
           </li>
         </ul>
         <p>Dėl sveikatos klausimų kreipkitės į gydytoją ar kitą kvalifikuotą specialistą.</p>
@@ -138,12 +138,13 @@ export default function TermsPage() {
   return (
     <LegalPage
       title="Naudojimo sąlygos"
+      path="/naudojimo-salygos"
       lead="Kam skirtas Skanis, kokia jo dabartinė būsena ir kodėl originalios pakuotės etiketę visada reikia patikrinti pačiam."
       summary={{
         title: "Trumpai",
         items: [
           "Skanis yra testavimo versija ir pagalbinė priemonė, o ne medicininė rekomendacija.",
-          "Skanis negarantuoja, kad produktas saugus ar be alergenų.",
+          "Skanis rodo, ar sudėtis atitinka jūsų pasirinkimus, bet negarantuoja, kad produktas jums saugus.",
           "Automatinis atpažinimas gali klysti, todėl visada patikrinkite originalią pakuotę.",
           "Registracija testavimui nieko nekainuoja ir neįpareigoja.",
         ],

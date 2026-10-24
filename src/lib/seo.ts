@@ -8,9 +8,23 @@ import type { Metadata } from "next";
  */
 export const indexable = process.env.CONTEXT === "production" || process.env.SITE_INDEXING === "true";
 
-export const defaultTitle = "Skanis – maisto sudėtis aiškiau iš pirmo žvilgsnio";
+export const defaultTitle = "Skanis – maisto sudėties skeneris: E priedai, saldikliai, konservantai";
 export const defaultDescription =
-  "Skanis padeda greičiau pastebėti tau svarbius alergenus maisto produktų sudėtyje. Nufotografuok etiketę, peržiūrėk ingredientus ir užsiregistruok pirmajam testavimui.";
+  "Skanis – programėlė, kuri nuskaito maisto etiketę ir per sekundę parodo E priedus, konservantus, saldiklius, dažiklius ir ar produktas tinka tavo mitybai. Netrukus App Store ir Google Play.";
+
+export const keywords = [
+  "maisto sudėtis",
+  "E priedai",
+  "maisto etiketės skeneris",
+  "sudėties skenavimas",
+  "konservantai",
+  "saldikliai",
+  "dažikliai",
+  "palmių aliejus",
+  "vegan",
+  "be glitimo",
+  "programėlė",
+];
 
 /** Per-page metadata with a canonical URL and matching Open Graph fields. */
 export function pageMetadata({

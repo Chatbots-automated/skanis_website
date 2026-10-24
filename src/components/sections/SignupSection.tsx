@@ -5,35 +5,21 @@ import Link from "next/link";
 import { AlertCircle, CheckCircle2, Loader2, Mail } from "lucide-react";
 import { AnimatePresence, m } from "motion/react";
 import { Reveal } from "@/components/ui/Reveal";
-import { ScanCorners } from "@/components/ui/ScanCorners";
+import { StoreButtons } from "@/components/ui/StoreButtons";
 import { cn } from "@/lib/utils";
 import {
   encodeSignup,
   sourceFromSearch,
   validateConsent,
   validateEmail,
-  type Platform,
 } from "@/lib/signup";
 
 const IS_DEV = process.env.NODE_ENV === "development";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-const PLATFORMS: Array<{ value: Platform; label: string }> = [
-  { value: "", label: "Nenurodyti" },
-  { value: "android", label: "Android" },
-  { value: "iphone", label: "iPhone" },
-];
-
-const NEXT = [
-  { n: "1", t: "Palik el. paštą", d: "Užtrunka kelias sekundes." },
-  { n: "2", t: "Kai atsiras vietų, parašysime", d: "Paaiškinsime, kaip įsidiegti testavimo versiją." },
-  { n: "3", t: "Išbandyk ir pasidalyk nuomone", d: "Tavo pastabos padės padaryti Skanis geresnį." },
-];
-
 export function SignupSection() {
   const [email, setEmail] = useState("");
-  const [platform, setPlatform] = useState<Platform>("");
   const [consent, setConsent] = useState(false);
   const [botField, setBotField] = useState("");
   const [errors, setErrors] = useState<{ email?: string; consent?: string }>({});
@@ -60,7 +46,7 @@ export function SignupSection() {
       const res = await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encodeSignup({ email, platform, consent, source: sourceFromSearch(window.location.search), botField }),
+        body: encodeSignup({ email, platform: "", consent, source: sourceFromSearch(window.location.search), botField }),
       });
       // Only a real 2xx counts. The dev server has no form handler, so it can never report success.
       if (!res.ok || IS_DEV) throw new Error(`Form endpoint answered ${res.status}`);
@@ -73,37 +59,26 @@ export function SignupSection() {
   }
 
   return (
-    <section id="registracija" aria-labelledby="signup-title" className="section-y bg-paper">
-      <div className="container-x">
-        <div className="relative overflow-hidden rounded-[2.25rem] bg-mint-soft/80 px-6 py-12 sm:px-12 sm:py-16 lg:px-16 lg:py-20">
-          <div aria-hidden="true" className="absolute -right-24 -top-24 size-96 rounded-full bg-mint/60 blur-3xl" />
-          <ScanCorners className="text-forest/25" inset="1rem" size="2.25rem" thickness={3} />
+    <section id="registracija" aria-labelledby="signup-title" className="bg-white px-3 pb-3 sm:px-4 sm:pb-4">
+      <div data-on-dark className="relative overflow-hidden rounded-[2rem] bg-ink px-6 py-16 text-white sm:px-12 lg:rounded-[2.75rem] lg:px-16 lg:py-24">
+        <div aria-hidden="true" className="absolute -right-32 -top-32 size-[28rem] rounded-full bg-grape/60 blur-3xl" />
+        <div aria-hidden="true" className="absolute -bottom-40 -left-24 size-[24rem] rounded-full bg-mint/25 blur-3xl" />
 
-          <div className="relative grid gap-12 lg:grid-cols-[1fr_28rem] lg:items-center lg:gap-20">
-            <Reveal>
-              <p className="eyebrow mb-4">Testavimas</p>
-              <h2 id="signup-title" className="text-[clamp(2rem,4.4vw,3.4rem)] text-forest">
-                Nori išbandyti Skanis pirmasis?
-              </h2>
-              <p className="mt-5 max-w-lg text-lg leading-relaxed text-ink/75">
-                Palik savo el. paštą ir sužinok, kada galėsi prisijungti prie pirmųjų testuotojų.
-              </p>
+        <div className="relative mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_26rem] lg:items-center lg:gap-20">
+          <Reveal>
+            <h2 id="signup-title" className="display text-[clamp(2.6rem,6vw,5.25rem)]">
+              Išbandyk
+              <br />
+              <span className="text-mint">pirmas.</span>
+            </h2>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-white/70">
+              Palik el. paštą ir gauk kvietimą į testavimo versiją, kai tik ji bus paruošta. Nemokamai ir be įsipareigojimų.
+            </p>
+            <StoreButtons tone="light" align="start" className="mt-8" />
+          </Reveal>
 
-              <ol className="mt-10 space-y-5">
-                {NEXT.map((s) => (
-                  <li key={s.n} className="flex gap-4">
-                    <span className="grid size-8 shrink-0 place-items-center rounded-full bg-forest text-sm font-extrabold text-white">{s.n}</span>
-                    <p className="leading-snug">
-                      <span className="block font-extrabold text-forest">{s.t}</span>
-                      <span className="text-muted">{s.d}</span>
-                    </p>
-                  </li>
-                ))}
-              </ol>
-            </Reveal>
-
-            <Reveal delay={0.1}>
-              <div className="rounded-[1.75rem] bg-white p-6 shadow-lift sm:p-8">
+          <Reveal delay={0.1}>
+            <div className="rounded-[1.75rem] bg-white p-6 text-ink shadow-lift sm:p-8">
                 <AnimatePresence mode="wait" initial={false}>
                   {status === "success" ? (
                     <m.div
@@ -115,10 +90,10 @@ export function SignupSection() {
                       animate={{ opacity: 1, y: 0 }}
                       className="py-6 text-center outline-none"
                     >
-                      <span className="mx-auto grid size-16 place-items-center rounded-full bg-sage text-leaf">
+                      <span className="mx-auto grid size-16 place-items-center rounded-full bg-mint-soft text-ink">
                         <CheckCircle2 className="size-8" strokeWidth={2.2} />
                       </span>
-                      <h3 className="mt-6 text-2xl text-forest">Ačiū! Esi sąraše.</h3>
+                      <h3 className="mt-6 text-2xl text-ink">Ačiū! Esi sąraše.</h3>
                       <p className="mx-auto mt-3 max-w-xs leading-relaxed text-muted">
                         Užregistravome <strong className="break-all text-ink">{sentTo}</strong>. Parašysime, kai atsiras vietų testavimui.
                       </p>
@@ -143,7 +118,7 @@ export function SignupSection() {
                       </p>
 
                       <div>
-                        <label htmlFor="signup-email" className="mb-2 block text-sm font-extrabold text-forest">
+                        <label htmlFor="signup-email" className="mb-2 block text-sm font-extrabold text-ink">
                           El. paštas
                         </label>
                         <div className="relative">
@@ -166,7 +141,7 @@ export function SignupSection() {
                             aria-invalid={!!errors.email}
                             aria-describedby={errors.email ? "signup-email-error" : undefined}
                             className={cn(
-                              "h-14 w-full rounded-2xl border bg-paper pl-12 pr-4 text-base text-ink outline-none transition-[border-color,box-shadow] placeholder:text-faint focus:border-leaf focus:shadow-[0_0_0_4px_rgb(159_223_196/0.45)]",
+                              "h-14 w-full rounded-2xl border bg-paper pl-12 pr-4 text-base text-ink outline-none transition-[border-color,box-shadow] placeholder:text-faint focus:border-grape focus:shadow-[0_0_0_4px_rgb(163_232_208/0.6)]",
                               errors.email ? "border-danger" : "border-line",
                             )}
                           />
@@ -179,28 +154,6 @@ export function SignupSection() {
                         )}
                       </div>
 
-                      <fieldset className="mt-6">
-                        <legend className="mb-2 text-sm font-extrabold text-forest">
-                          Telefonas <span className="font-medium text-muted">(nebūtina)</span>
-                        </legend>
-                        <div className="grid grid-cols-3 gap-2 rounded-2xl bg-paper p-1.5">
-                          {PLATFORMS.map((p) => (
-                            <label key={p.value || "none"} className="relative cursor-pointer">
-                              <input
-                                type="radio"
-                                name="platform"
-                                value={p.value}
-                                checked={platform === p.value}
-                                onChange={() => setPlatform(p.value)}
-                                className="peer sr-only"
-                              />
-                              <span className="flex min-h-11 items-center justify-center rounded-xl px-2 text-sm font-bold text-muted transition-all peer-checked:bg-white peer-checked:text-forest peer-checked:shadow-soft peer-focus-visible:outline-3 peer-focus-visible:outline-leaf">
-                                {p.label}
-                              </span>
-                            </label>
-                          ))}
-                        </div>
-                      </fieldset>
 
                       <div className="mt-6">
                         <label className="flex cursor-pointer items-start gap-3.5">
@@ -220,8 +173,8 @@ export function SignupSection() {
                           <span
                             aria-hidden="true"
                             className={cn(
-                              "mt-0.5 grid size-6 shrink-0 place-items-center rounded-md border-2 bg-white text-transparent transition-all peer-checked:border-leaf peer-checked:bg-leaf peer-checked:text-white peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-leaf",
-                              errors.consent ? "border-danger" : "border-forest/30",
+                              "mt-0.5 grid size-6 shrink-0 place-items-center rounded-md border-2 bg-white text-transparent transition-all peer-checked:border-grape peer-checked:bg-grape peer-checked:text-white peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-grape",
+                              errors.consent ? "border-danger" : "border-ink/30",
                             )}
                           >
                             <svg viewBox="0 0 16 16" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -234,7 +187,7 @@ export function SignupSection() {
                               href="/privatumo-politika"
                               target="_blank"
                               rel="noopener"
-                              className="font-bold text-leaf underline decoration-mint decoration-2 underline-offset-2"
+                              className="font-bold text-grape underline decoration-grape/30 decoration-2 underline-offset-2"
                             >
                               privatumo politikoje
                             </Link>
@@ -266,7 +219,7 @@ export function SignupSection() {
                       <button
                         type="submit"
                         disabled={submitting}
-                        className="mt-7 inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-full bg-forest px-8 text-base font-bold text-white shadow-[0_10px_24px_-10px_rgb(20_63_57/0.7)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-forest-deep active:scale-[0.99] disabled:translate-y-0 disabled:opacity-80"
+                        className="mt-7 inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-full bg-ink px-8 text-base font-bold text-white shadow-[0_10px_24px_-10px_rgb(17_17_17/0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-grape active:scale-[0.99] disabled:translate-y-0 disabled:opacity-80"
                       >
                         {submitting ? (
                           <>
@@ -274,7 +227,7 @@ export function SignupSection() {
                             Siunčiama…
                           </>
                         ) : (
-                          "Prisijungti prie testavimo"
+                          "Gauti kvietimą"
                         )}
                       </button>
                       <p className="mt-4 text-center text-xs leading-relaxed text-muted">
@@ -283,9 +236,8 @@ export function SignupSection() {
                     </m.form>
                   )}
                 </AnimatePresence>
-              </div>
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

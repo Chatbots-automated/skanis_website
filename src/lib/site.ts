@@ -9,6 +9,10 @@ export const SITE_URL = clean(process.env.NEXT_PUBLIC_SITE_URL || "http://localh
 
 export const SITE_NAME = "Skanis";
 
+/** Store listings. While empty, the store buttons render as "coming soon" placeholders. */
+export const APP_STORE_URL = clean(process.env.NEXT_PUBLIC_APP_STORE_URL);
+export const PLAY_STORE_URL = clean(process.env.NEXT_PUBLIC_PLAY_STORE_URL);
+
 export const CONTACT_EMAIL = clean(process.env.NEXT_PUBLIC_CONTACT_EMAIL);
 
 export const LEGAL = {

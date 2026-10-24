@@ -1,69 +1,64 @@
 @import "tailwindcss";
 
 /*
- * Skanis design tokens.
- * Palette: the app's own forest green + logo mint on a warm off-white, with
- * restrained amber / red used only for allergen findings.
+ * Skanis design tokens, from the brand sheet:
+ * mint #A3E8D0 (accent / alternative background), rich black #111111 (text),
+ * deep Daitoku purple #5E2680 (contrast on mint), clean white #FFFFFF.
  */
 @theme inline {
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-display-face), var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 }
 
 @theme {
-  --color-paper: #faf9f6;
   --color-white: #ffffff;
-  --color-ink: #1c2825;
-  --color-muted: #5b6d66;
-  --color-faint: #62736b;
-  --color-line: #e4e8e2;
+  --color-paper: #ffffff;
+  --color-ink: #111111;
+  --color-muted: #55595b;
+  --color-faint: #6b7072;
+  --color-line: #e6e8e7;
 
-  --color-forest: #143f39;
-  --color-forest-deep: #0c2a26;
-  --color-leaf: #17694a;
-  --color-mint: #9fdfc4;
-  --color-mint-soft: #cdeee0;
-  --color-sage: #e8f3ec;
+  --color-mint: #a3e8d0;
+  --color-mint-soft: #dcf6ec;
+  --color-mint-deep: #5fc9a4;
+  --color-grape: #5e2680;
+  --color-grape-soft: #efe6f5;
 
   --color-danger: #b3382e;
   --color-danger-soft: #f9ebe8;
   --color-danger-line: #efcdc7;
-  --color-amber: #9a6509;
-  --color-amber-soft: #faf3e2;
-  --color-amber-line: #ecd9a8;
 
   --radius-card: 1.75rem;
-  --radius-tile: 1.125rem;
 
-  --shadow-soft: 0 1px 2px rgb(20 63 57 / 0.04), 0 14px 34px -14px rgb(20 63 57 / 0.16);
-  --shadow-lift: 0 2px 4px rgb(20 63 57 / 0.05), 0 28px 60px -22px rgb(20 63 57 / 0.28);
-  --shadow-phone: 0 50px 90px -40px rgb(12 42 38 / 0.55), 0 18px 36px -18px rgb(12 42 38 / 0.35);
+  --shadow-soft: 0 1px 2px rgb(17 17 17 / 0.04), 0 14px 34px -14px rgb(17 17 17 / 0.16);
+  --shadow-lift: 0 2px 4px rgb(17 17 17 / 0.05), 0 28px 60px -22px rgb(17 17 17 / 0.28);
+  --shadow-phone: 0 60px 100px -40px rgb(17 17 17 / 0.5), 0 18px 36px -18px rgb(17 17 17 / 0.3);
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --animate-scan: scan 2.6s var(--ease-out-soft) infinite;
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee-rev: marquee 44s linear infinite reverse;
   --animate-pulse-ring: pulse-ring 2.4s ease-out infinite;
-  --animate-float-slow: float-slow 7s ease-in-out infinite;
+  --animate-scan: scan 2.4s ease-in-out infinite;
 
-  @keyframes scan {
-    0% { transform: translateY(0); opacity: 0; }
-    12% { opacity: 1; }
-    88% { opacity: 1; }
-    100% { transform: translateY(var(--scan-distance, 160px)); opacity: 0; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
   @keyframes pulse-ring {
     0% { transform: scale(0.9); opacity: 0.55; }
-    80%, 100% { transform: scale(1.5); opacity: 0; }
+    80%, 100% { transform: scale(1.6); opacity: 0; }
   }
-  @keyframes float-slow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+  @keyframes scan {
+    0%, 100% { top: 12%; }
+    50% { top: 82%; }
   }
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5.5rem;
+    scroll-padding-top: 5rem;
     -webkit-text-size-adjust: 100%;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -77,27 +72,23 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
     overflow-x: clip;
   }
   h1, h2, h3, h4 {
     font-weight: 800;
     letter-spacing: -0.03em;
-    line-height: 1.08;
+    line-height: 1.05;
     text-wrap: balance;
   }
   p { text-wrap: pretty; }
-  ::selection { background: var(--color-mint); color: var(--color-forest-deep); }
+  ::selection { background: var(--color-mint); color: var(--color-ink); }
 
   :focus-visible {
-    outline: 3px solid var(--color-leaf);
+    outline: 3px solid var(--color-grape);
     outline-offset: 3px;
     border-radius: 0.5rem;
   }
-  .on-dark :focus-visible,
-  [data-on-dark] :focus-visible {
-    outline-color: var(--color-mint);
-  }
+  [data-on-dark] :focus-visible { outline-color: var(--color-mint); }
   button { cursor: pointer; }
   button:disabled { cursor: not-allowed; }
 }
@@ -105,61 +96,22 @@
 @layer components {
   .container-x {
     width: 100%;
-    max-width: 76rem;
+    max-width: 74rem;
     margin-inline: auto;
     padding-inline: 1.25rem;
   }
   @media (min-width: 640px) {
     .container-x { padding-inline: 2rem; }
   }
-  .section-y { padding-block: 5rem; }
-  @media (min-width: 1024px) {
-    .section-y { padding-block: 8rem; }
-  }
 
-  .eyebrow {
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--color-leaf);
-  }
-
-  /* Ingredient highlight: a marker sweep that grows from the left. */
-  .mark-hit {
-    --mark: var(--color-danger-soft);
-    --mark-ink: var(--color-danger);
-    color: var(--mark-ink);
-    font-weight: 800;
-    border-radius: 0.35rem;
-    padding: 0.05em 0.28em;
-    margin-inline: -0.1em;
-    background: linear-gradient(var(--mark), var(--mark)) left / 100% 100% no-repeat;
-    box-shadow: inset 0 0 0 1px var(--color-danger-line);
-    animation: mark-in 0.5s var(--ease-out-soft) both;
-  }
-  .mark-hit[data-kind="trace"] {
-    --mark: var(--color-amber-soft);
-    --mark-ink: var(--color-amber);
-    box-shadow: inset 0 0 0 1px var(--color-amber-line);
-  }
-  @keyframes mark-in {
-    from { background-size: 0% 100%; color: inherit; }
-    to { background-size: 100% 100%; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .mark-hit { animation: none; }
-  }
-
-  .placeholder-field {
-    background: #fff2b8;
-    color: #5a4300;
-    border-radius: 0.3rem;
-    padding: 0.05em 0.35em;
-    font-weight: 700;
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.04;
   }
 }
 
-/* Hide the scrollbar on horizontally scrollable strips without disabling scroll. */
-.no-scrollbar { scrollbar-width: none; }
-.no-scrollbar::-webkit-scrollbar { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee, .animate-marquee-rev, .animate-scan { animation: none; }
+}

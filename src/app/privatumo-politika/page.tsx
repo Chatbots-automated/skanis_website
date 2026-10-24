@@ -35,7 +35,7 @@ const sections: LegalSection[] = [
       <>
         <h3>Registracija testavimui</h3>
         <p>
-          Jei užsiregistruojate testavimui, saugome jūsų el. pašto adresą, telefono tipą (Android ar iPhone), jei jį pasirinkote, nuorodą arba
+          Jei užsiregistruojate testavimui, saugome jūsų el. pašto adresą, nuorodą arba
           kanalą, iš kurio atėjote (jei jis nurodytas nuorodoje), ir tai, kad sutikote, jog su jumis susisieksime. Šiuos duomenis naudojame tik tam, kad
           susisiektume dėl Skanis testavimo. Teisinis pagrindas – jūsų sutikimas (BDAR 6 str. 1 d. a p.), kurį galite bet kada atšaukti.
         </p>
@@ -69,10 +69,10 @@ const sections: LegalSection[] = [
           Kiekvienas nuskaitymas palieka mažą miniatiūrą nuskaitymų istorijoje jūsų telefone. Istorija saugoma tik jūsų telefone ir iš jo
           nesiunčiama. Ją pašalina istorijos įrašo ištrynimas, duomenų ištrynimas nustatymuose arba programėlės pašalinimas.
         </p>
-        <h3>Alergenų ir mitybos pasirinkimai</h3>
+        <h3>Jūsų filtrai ir mitybos pasirinkimai</h3>
         <p>
-          Pasirinkti alergenai ir mitybos parinktys saugomi jūsų telefone, kad programėlė galėtų su jais lyginti etiketes. Tai gali būti
-          informacija apie jūsų sveikatą ar mitybą, todėl ji laikoma jautria. Testavimo metu pasirinktų parinkčių sąrašas (be vardo) taip pat
+          Jūsų pasirinkti filtrai (pavyzdžiui, E priedai, mitybos tipas, gyvenimo būdo pasirinkimai ar alergenai) saugomi jūsų telefone, kad programėlė galėtų su jais lyginti etiketes. Kai kurie iš jų (pavyzdžiui,
+          alergenai ar mitybos apribojimai) gali atskleisti informaciją apie jūsų sveikatą, todėl laikome juos jautriais. Testavimo metu pasirinktų parinkčių sąrašas (be vardo) taip pat
           saugomas serveryje kartu su atsitiktiniu įrenginio identifikatoriumi, kad suprastume, kaip naudojamas testavimas. Pagrindas – jūsų aiškus
           sutikimas (BDAR 6 str. 1 d. a p. ir 9 str. 2 d. a p.).
         </p>
@@ -165,7 +165,7 @@ const sections: LegalSection[] = [
 export const metadata = pageMetadata({
   title: "Privatumo politika – Skanis",
   description:
-    "Kaip Skanis tvarko duomenis: kamera ir nuotraukos, pasirinkti alergenai, anoniminė statistika, registracija testavimui ir jūsų teisės.",
+    "Kaip Skanis tvarko duomenis: kamera ir nuotraukos, pasirinkti filtrai, anoniminė statistika, registracija testavimui ir jūsų teisės.",
   path: "/privatumo-politika",
 });
 
@@ -173,6 +173,7 @@ export default function PrivacyPage() {
   return (
     <LegalPage
       title="Privatumo politika"
+      path="/privatumo-politika"
       lead="Paprastai apie tai, kokius duomenis tvarko Skanis svetainė ir testavimo versijos programėlė, kodėl ir kaip jais galite valdyti."
       summary={{
         title: "Trumpai",
@@ -180,7 +181,7 @@ export default function PrivacyPage() {
           "Skanis naudoja kamerą tik maisto etiketės ingredientų sąrašui nufotografuoti.",
           "Etiketei perskaityti nuotrauka šifruotu ryšiu siunčiama į skaitymo paslaugą. Nuotraukų ir nuskaityto teksto savo serveriuose nesaugome.",
           "Nuskaitymų istorija lieka tik jūsų telefone.",
-          "Svetainėje renkame tik tai, ką pats įrašote registracijos formoje: el. paštą ir, jei norite, telefono tipą.",
+          "Svetainėje renkame tik tai, ką pats įrašote registracijos formoje: tik el. paštą.",
           "Jokios reklamos, jokių reklamos slapukų, jokio duomenų pardavimo.",
         ],
       }}

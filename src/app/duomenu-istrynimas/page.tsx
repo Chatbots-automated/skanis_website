@@ -59,7 +59,8 @@ export const metadata = pageMetadata({
 export default function DataDeletionPage() {
   return (
     <LegalPage
-      title="Skanis duomenų ištrynimas"
+      title="Duomenų ištrynimas"
+      path="/duomenu-istrynimas"
       lead="Kaip ištrinti su jūsų Skanis naudojimu susietus duomenis programėlėje arba pateikus prašymą."
       sections={sections}
     />

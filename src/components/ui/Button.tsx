@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "secondary" | "mint" | "ghost-light";
+type Variant = "primary" | "secondary" | "mint" | "light";
 type Size = "md" | "lg" | "sm";
 
 const base =
@@ -11,11 +11,10 @@ const base =
   "active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
-  primary:
-    "bg-forest text-white shadow-[0_10px_24px_-10px_rgb(20_63_57/0.7)] hover:bg-forest-deep hover:shadow-[0_16px_30px_-12px_rgb(20_63_57/0.8)] hover:-translate-y-0.5",
-  secondary: "border border-forest/20 bg-white/70 text-forest hover:border-forest/50 hover:bg-white hover:-translate-y-0.5",
-  mint: "bg-mint text-forest-deep shadow-[0_10px_30px_-10px_rgb(159_223_196/0.7)] hover:bg-mint-soft hover:-translate-y-0.5",
-  "ghost-light": "border border-white/25 text-white hover:border-white/60 hover:bg-white/10",
+  primary: "bg-ink text-white hover:-translate-y-0.5 hover:bg-grape hover:shadow-[0_16px_30px_-12px_rgb(94_38_128/0.6)]",
+  secondary: "border border-ink/15 bg-white/60 text-ink hover:-translate-y-0.5 hover:border-ink/40 hover:bg-white",
+  mint: "bg-mint text-ink hover:-translate-y-0.5 hover:bg-white",
+  light: "bg-white text-ink hover:-translate-y-0.5 hover:bg-mint",
 };
 
 const sizes: Record<Size, string> = {
