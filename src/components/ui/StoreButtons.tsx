@@ -21,14 +21,16 @@ function PlayLogo({ className }: { className?: string }) {
 }
 
 const STORES = [
-  { key: "apple", name: "Apple App Store", url: APP_STORE_URL, Logo: AppleLogo },
-  { key: "google", name: "Google Play Store", url: PLAY_STORE_URL, Logo: PlayLogo },
+  { key: "apple", brand: "Apple", name: "App Store", url: APP_STORE_URL, Logo: AppleLogo },
+  { key: "google", brand: null, name: "Google Play", url: PLAY_STORE_URL, Logo: PlayLogo },
 ] as const;
 
 /**
  * App Store / Google Play buttons. Each one is a real link once its URL is set
  * (NEXT_PUBLIC_APP_STORE_URL / NEXT_PUBLIC_PLAY_STORE_URL); until then it is a
- * placeholder with a small "Netrukus" tag that isn't clickable.
+ * placeholder that isn't clickable. Compact side by side on phones, roomier
+ * from `sm` up; the "Netrukus" note sits on each button on wide screens and
+ * once under the pair on phones.
  */
 export function StoreButtons({
   className,
@@ -39,34 +41,48 @@ export function StoreButtons({
   tone?: "dark" | "light";
   align?: "center" | "start";
 }) {
+  const anyMissing = STORES.some((s) => !s.url);
   return (
-    <div className={cn("flex flex-wrap gap-3", align === "center" ? "justify-center" : "justify-start", className)}>
-      {STORES.map(({ key, name, url, Logo }) => {
-        const inner = (
-          <>
-            <Logo className="size-[1.1rem] shrink-0" />
-            <span className="font-semibold">{name}</span>
-            {!url && (
-              <span className={cn("rounded-full px-2 py-0.5 text-[0.68rem] font-bold", tone === "dark" ? "bg-white/15 text-white/80" : "bg-ink/[0.07] text-ink/60")}>
-                Netrukus
+    <div className={cn("flex flex-col gap-2.5", align === "center" ? "items-center" : "items-start", className)}>
+      <div className="flex gap-2.5 sm:gap-3">
+        {STORES.map(({ key, brand, name, url, Logo }) => {
+          const inner = (
+            <>
+              <Logo className="size-4 shrink-0 sm:size-[1.1rem]" />
+              <span className="font-semibold">
+                {brand && <span className="hidden sm:inline">{brand} </span>}
+                {name}
               </span>
-            )}
-          </>
-        );
-        const base = cn(
-          "inline-flex h-14 items-center gap-2.5 rounded-full px-7 text-[1.05rem] transition-[transform,background-color] duration-300",
-          tone === "dark" ? "bg-ink text-white" : "bg-white text-ink",
-        );
-        return url ? (
-          <a key={key} href={url} target="_blank" rel="noopener" className={cn(base, "hover:-translate-y-0.5 hover:bg-grape hover:text-white")}>
-            {inner}
-          </a>
-        ) : (
-          <span key={key} role="img" aria-label={`${name} – netrukus`} className={cn(base, "cursor-default")}>
-            {inner}
-          </span>
-        );
-      })}
+              {!url && (
+                <span
+                  className={cn(
+                    "hidden rounded-full px-2 py-0.5 text-[0.68rem] font-bold sm:inline",
+                    tone === "dark" ? "bg-white/15 text-white/80" : "bg-ink/[0.07] text-ink/60",
+                  )}
+                >
+                  Netrukus
+                </span>
+              )}
+            </>
+          );
+          const base = cn(
+            "inline-flex h-11 items-center gap-2 whitespace-nowrap rounded-full px-4 text-[0.9rem] transition-[transform,background-color] duration-300 sm:h-14 sm:gap-2.5 sm:px-7 sm:text-[1.05rem]",
+            tone === "dark" ? "bg-ink text-white" : "bg-white text-ink",
+          );
+          return url ? (
+            <a key={key} href={url} target="_blank" rel="noopener" className={cn(base, "hover:-translate-y-0.5 hover:bg-grape hover:text-white")}>
+              {inner}
+            </a>
+          ) : (
+            <span key={key} role="img" aria-label={`${name} – netrukus`} className={cn(base, "cursor-default")}>
+              {inner}
+            </span>
+          );
+        })}
+      </div>
+      {anyMissing && (
+        <p className={cn("text-xs font-semibold sm:hidden", tone === "dark" ? "text-ink/45" : "text-white/50")}>Netrukus abiejose parduotuvėse</p>
+      )}
     </div>
   );
 }

@@ -70,7 +70,7 @@ export function HeroDemo() {
   return (
     <div ref={stage} className="relative mx-auto mt-12 w-full max-w-6xl text-left sm:mt-16">
       {/* product picker (phones and tablets) */}
-      <ProductPicker value={productId} onPick={pick} className="mx-auto mb-8 max-w-sm lg:hidden" />
+      <ProductSegments value={productId} onPick={pick} className="mx-auto mb-10 max-w-sm sm:mb-12 lg:hidden" />
 
       <div className="relative grid items-center [perspective:1600px] lg:grid-cols-[1fr_auto_1fr] lg:gap-12">
         {/* filters card */}
@@ -143,21 +143,22 @@ export function HeroDemo() {
       </div>
 
       {/* filters as chips (phones and tablets) */}
-      <div className="mt-12 lg:hidden">
-        <p className="text-center text-sm font-semibold text-muted">Ko vengi? Pažymėk:</p>
-        <ul className="mt-3 flex flex-wrap justify-center gap-2">
+      <div className="mt-10 sm:mt-12 lg:hidden">
+        <p className="text-center text-xs font-bold uppercase tracking-[0.12em] text-ink/40">Ko vengi?</p>
+        {/* one swipeable row on phones, wrapped and centred on tablets */}
+        <ul className="no-scrollbar -mx-5 mt-3 flex snap-x gap-2 overflow-x-auto px-5 [mask-image:linear-gradient(90deg,transparent,#000_1.25rem,#000_calc(100%-1.25rem),transparent)] sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0 sm:[mask-image:none]">
           {FILTERS.map((f) => (
-            <li key={f.id}>
+            <li key={f.id} className="shrink-0 snap-start">
               <button
                 type="button"
                 aria-pressed={on.has(f.id)}
                 onClick={() => toggle(f.id)}
                 className={cn(
-                  "inline-flex h-11 items-center gap-1.5 rounded-full px-4 text-[0.95rem] font-bold transition-colors active:scale-95",
+                  "inline-flex h-10 items-center gap-1.5 whitespace-nowrap rounded-full px-4 text-sm font-bold transition-colors active:scale-95",
                   on.has(f.id) ? "bg-grape text-white" : "bg-ink/[0.05] text-ink/70",
                 )}
               >
-                {on.has(f.id) && <Check className="size-4" strokeWidth={3} />}
+                {on.has(f.id) && <Check className="size-3.5" strokeWidth={3} />}
                 {f.label}
               </button>
             </li>
@@ -165,7 +166,7 @@ export function HeroDemo() {
         </ul>
       </div>
 
-      <p className="mt-10 text-center text-xs text-faint lg:mt-16">
+      <p className="mx-auto mt-8 max-w-xs text-center text-[0.7rem] leading-relaxed text-faint sm:max-w-none sm:text-xs lg:mt-16">
         Iliustracija. Produktai ir prekių ženklai išgalvoti, sudėtis – kaip tipinėse šių produktų etiketėse.
       </p>
     </div>
@@ -222,6 +223,33 @@ function ProductPicker({
             <ProductArt id={p.id} />
           </span>
           <span className="line-clamp-1 text-center text-xs font-bold text-ink">{SHORT[p.id]}</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+/** Phones: the products as one slim segmented switch. */
+function ProductSegments({ value, onPick, className }: { value: ProductId; onPick: (id: ProductId) => void; className?: string }) {
+  return (
+    <div role="radiogroup" aria-label="Produktas" className={cn("grid grid-cols-3 gap-1 rounded-full bg-ink/[0.05] p-1", className)}>
+      {PRODUCTS.map((p) => (
+        <button
+          key={p.id}
+          type="button"
+          role="radio"
+          aria-checked={p.id === value}
+          aria-label={`${p.brand} ${p.name}`}
+          onClick={() => onPick(p.id)}
+          className={cn(
+            "flex h-10 items-center justify-center gap-1.5 rounded-full text-[0.82rem] font-bold transition-[background-color,box-shadow,color]",
+            p.id === value ? "bg-white text-ink shadow-[0_1px_3px_rgb(17_17_17/0.12)]" : "text-ink/55",
+          )}
+        >
+          <span className="block h-6 w-5 shrink-0">
+            <ProductArt id={p.id} className="drop-shadow-none" />
+          </span>
+          {SHORT[p.id]}
         </button>
       ))}
     </div>

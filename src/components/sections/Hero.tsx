@@ -20,7 +20,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease }}
-          className="inline-flex items-center gap-2.5 rounded-full bg-mint/50 py-1.5 pl-3 pr-4 text-sm font-semibold text-ink"
+          className="inline-flex items-center gap-2 rounded-full bg-mint/50 py-1 pl-2.5 pr-3.5 text-xs font-semibold text-ink sm:gap-2.5 sm:py-1.5 sm:pl-3 sm:pr-4 sm:text-sm"
         >
           <span aria-hidden="true" className="relative grid size-2 place-items-center">
             <span className="absolute inline-flex size-full animate-pulse-ring rounded-full bg-grape motion-reduce:hidden" />
@@ -45,13 +45,13 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.18, ease }}
-          className="mt-5 max-w-xl text-[1.05rem] leading-relaxed text-ink/65 sm:text-xl"
+          className="mt-4 max-w-[21rem] text-[0.98rem] leading-relaxed text-ink/60 sm:mt-5 sm:max-w-xl sm:text-xl"
         >
-          Tavo išmanusis maisto sudėties gidas. Nufotografuok etiketę ir per sekundę pamatyk, ar produktas tinka tau.
+          Tavo išmanusis maisto sudėties gidas. Nufotografuok etiketę ir per kelias sekundes pamatyk, ar produktas tinka tau.
         </m.p>
 
         <m.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.28, ease }}>
-          <StoreButtons className="mt-8" />
+          <StoreButtons className="mt-7 sm:mt-8" />
         </m.div>
 
         <m.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.4, ease }} className="w-full">

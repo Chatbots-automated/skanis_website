@@ -10,7 +10,7 @@ export const indexable = process.env.CONTEXT === "production" || process.env.SIT
 
 export const defaultTitle = "Skanis – maisto sudėties skeneris: E priedai, saldikliai, konservantai";
 export const defaultDescription =
-  "Skanis – programėlė, kuri nuskaito maisto etiketę ir per sekundę parodo E priedus, konservantus, saldiklius, dažiklius ir ar produktas tinka tavo mitybai. Netrukus App Store ir Google Play.";
+  "Skanis – programėlė, kuri nuskaito maisto etiketę ir per kelias sekundes parodo E priedus, konservantus, saldiklius, dažiklius ir ar produktas tinka tavo mitybai. Netrukus App Store ir Google Play.";
 
 export const keywords = [
   "maisto sudėtis",

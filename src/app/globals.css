@@ -115,3 +115,7 @@
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee, .animate-marquee-rev, .animate-scan { animation: none; }
 }
+
+/* Hide the scrollbar on horizontally scrollable strips without disabling scroll. */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }

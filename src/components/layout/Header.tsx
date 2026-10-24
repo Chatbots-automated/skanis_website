@@ -17,10 +17,10 @@ export function Header() {
       )}
     >
       <div className={cn("container-x flex items-center justify-between transition-[height] duration-300", scrolled ? "h-16" : "h-[4.5rem]")}>
-        <Link href="/" aria-label="Skanis – į pradžią" className="rounded-lg text-[1.05rem]">
+        <Link href="/" aria-label="Skanis – į pradžią" className="rounded-lg text-[0.95rem] sm:text-[1.05rem]">
           <Logo />
         </Link>
-        <Button href="/#registracija" size="sm">
+        <Button href="/#registracija" size="nav">
           Gauti kvietimą
         </Button>
       </div>

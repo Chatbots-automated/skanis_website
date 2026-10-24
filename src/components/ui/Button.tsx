@@ -3,7 +3,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 type Variant = "primary" | "secondary" | "mint" | "light";
-type Size = "md" | "lg" | "sm";
+type Size = "md" | "lg" | "sm" | "nav";
 
 const base =
   "group/btn relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-full font-bold " +
@@ -19,6 +19,8 @@ const variants: Record<Variant, string> = {
 
 const sizes: Record<Size, string> = {
   sm: "h-10 px-5 text-sm",
+  // header: a touch smaller on phones
+  nav: "h-9 px-4 text-[0.8rem] sm:h-10 sm:px-5 sm:text-sm",
   md: "h-12 px-6 text-[0.95rem]",
   lg: "h-14 px-8 text-base",
 };
