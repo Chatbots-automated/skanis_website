@@ -18,12 +18,28 @@ export function LogoMark({ className, strokeWidth = 19 }: { className?: string; 
   );
 }
 
-/** Mark + "SKANIS" wordmark. */
+/** The mark on the logo's mint tile, as on the app icon and in the app's header. */
+export function LogoTile({ className }: { className?: string }) {
+  return (
+    <span className={cn("grid size-[2em] shrink-0 place-items-center rounded-[28%] bg-mint text-brand-deep", className)}>
+      <LogoMark className="h-[62%] w-auto" strokeWidth={21} />
+    </span>
+  );
+}
+
+/** Mint tile + "SKANIS" wordmark in the app's brand green (mint on dark backgrounds). */
 export function Logo({ className, tone = "dark" }: { className?: string; tone?: "dark" | "light" }) {
   return (
-    <span className={cn("inline-flex items-center gap-2.5", tone === "light" ? "text-white" : "text-ink", className)}>
-      <LogoMark className="h-[1.55em] w-auto" />
-      <span className="font-extrabold uppercase tracking-[0.04em] leading-none text-[1.2em]">Skanis</span>
+    <span className={cn("inline-flex items-center gap-2.5", className)}>
+      <LogoTile />
+      <span
+        className={cn(
+          "font-extrabold uppercase tracking-[0.12em] leading-none text-[1.2em]",
+          tone === "light" ? "text-mint" : "text-brand",
+        )}
+      >
+        Skanis
+      </span>
     </span>
   );
 }

@@ -13,7 +13,7 @@ export function Header() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300",
-        scrolled ? "bg-white/80 shadow-[0_1px_0_rgb(17_17_17/0.08)] backdrop-blur-xl" : "bg-transparent",
+        scrolled ? "bg-paper/80 shadow-[0_1px_0_rgb(22_34_27/0.08)] backdrop-blur-xl" : "bg-transparent",
       )}
     >
       <div className={cn("container-x flex items-center justify-between transition-[height] duration-300", scrolled ? "h-16" : "h-[4.5rem]")}>

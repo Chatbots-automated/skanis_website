@@ -110,7 +110,7 @@ export function HeroDemo() {
               <span key={c} className={cn("absolute size-11 border-ink sm:size-16", c)} />
             ))}
           </m.div>
-          <div aria-hidden="true" className="pointer-events-none absolute inset-[-25%] -z-10 rounded-full bg-[radial-gradient(closest-side,rgb(163_232_208/0.65),transparent)]" />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-[-25%] -z-10 rounded-full bg-[radial-gradient(closest-side,rgb(159_223_196/0.65),transparent)]" />
           <Phone className="h-[min(60svh,560px)] min-h-[25rem] sm:h-[min(64svh,600px)]">
             {/* the live region tells screen-reader users what the phone concluded */}
             <p className="sr-only" aria-live="polite">
@@ -155,7 +155,7 @@ export function HeroDemo() {
                 onClick={() => toggle(f.id)}
                 className={cn(
                   "inline-flex h-10 items-center gap-1.5 whitespace-nowrap rounded-full px-4 text-sm font-bold transition-colors active:scale-95",
-                  on.has(f.id) ? "bg-grape text-white" : "bg-ink/[0.05] text-ink/70",
+                  on.has(f.id) ? "bg-brand text-white" : "bg-ink/[0.05] text-ink/70",
                 )}
               >
                 {on.has(f.id) && <Check className="size-3.5" strokeWidth={3} />}
@@ -187,7 +187,7 @@ function Card({ title, sub, children }: { title: string; sub: string; children: 
 
 function Switch({ on }: { on: boolean }) {
   return (
-    <span aria-hidden="true" className={cn("relative h-7 w-12 shrink-0 rounded-full transition-colors duration-300", on ? "bg-grape" : "bg-ink/15")}>
+    <span aria-hidden="true" className={cn("relative h-7 w-12 shrink-0 rounded-full transition-colors duration-300", on ? "bg-brand" : "bg-ink/15")}>
       <span className={cn("absolute top-1 size-5 rounded-full bg-white shadow transition-[left] duration-300 ease-out-soft", on ? "left-6" : "left-1")} />
     </span>
   );
@@ -243,7 +243,7 @@ function ProductSegments({ value, onPick, className }: { value: ProductId; onPic
           onClick={() => onPick(p.id)}
           className={cn(
             "flex h-10 items-center justify-center gap-1.5 rounded-full text-[0.82rem] font-bold transition-[background-color,box-shadow,color]",
-            p.id === value ? "bg-white text-ink shadow-[0_1px_3px_rgb(17_17_17/0.12)]" : "text-ink/55",
+            p.id === value ? "bg-white text-ink shadow-[0_1px_3px_rgb(22_34_27/0.12)]" : "text-ink/55",
           )}
         >
           <span className="block h-6 w-5 shrink-0">
@@ -263,7 +263,7 @@ function Label({ parts, on, className }: { parts: Part[]; on: ReadonlySet<Filter
     <p className={className}>
       {parts.map((part, i) =>
         part.filter && on.has(part.filter) ? (
-          <mark key={i} className="rounded-md bg-grape-soft px-1 font-bold text-grape">
+          <mark key={i} className="rounded-md bg-danger-soft px-1 font-bold text-danger">
             {part.text}
           </mark>
         ) : (
@@ -297,7 +297,7 @@ function ScanScreen({ product }: { product: Product }) {
         ].map((c) => (
           <span key={c} className={cn("absolute size-[13%] border-mint", c)} />
         ))}
-        <span className="absolute inset-x-[7%] h-[2px] animate-scan rounded-full bg-mint shadow-[0_0_14px_4px_rgb(163_232_208/0.7)]" />
+        <span className="absolute inset-x-[7%] h-[2px] animate-scan rounded-full bg-mint shadow-[0_0_14px_4px_rgb(159_223_196/0.7)]" />
         <p className="absolute inset-x-0 bottom-[3.5%] text-center text-[0.9em] font-semibold text-white/80">Skaitomi ingredientai…</p>
       </div>
       <div className="flex justify-center py-[6%]">
@@ -325,20 +325,20 @@ function ResultScreen({ product, hits, anyFilter }: { product: Product; hits: Pa
           <span className="line-clamp-2 block text-[1em] font-extrabold text-ink">{product.name}</span>
         </span>
       </div>
-      <div className={cn("mx-[6%] mt-[4%] flex items-center gap-[0.9em] rounded-[1.4em] p-[5.5%]", fits ? "bg-mint text-ink" : "bg-grape text-white")}>
-        <span className={cn("grid size-[2.9em] shrink-0 place-items-center rounded-full", fits ? "bg-ink text-mint" : "bg-white/15 text-white")}>
+      <div className={cn("mx-[6%] mt-[4%] flex items-center gap-[0.9em] rounded-[1.4em] p-[5.5%]", fits ? "bg-brand text-white" : "bg-danger text-white")}>
+        <span className={cn("grid size-[2.9em] shrink-0 place-items-center rounded-full", "bg-white/15 text-white")}>
           {fits ? <Check className="size-[1.5em]" strokeWidth={3} /> : <X className="size-[1.5em]" strokeWidth={3} />}
         </span>
         <span>
           <span className="block text-[2em] font-extrabold leading-none tracking-tight">{fits ? "Tinka" : "Netinka"}</span>
-          <span className={cn("mt-[0.3em] block text-[0.92em]", fits ? "text-ink/70" : "text-white/75")}>pagal tavo filtrus</span>
+          <span className={cn("mt-[0.3em] block text-[0.92em]", "text-white/80")}>pagal tavo filtrus</span>
         </span>
       </div>
 
       <p className="mx-[6%] mt-[6%] text-[0.82em] font-extrabold uppercase tracking-[0.12em] text-ink/45">{fits ? "Kodėl tinka?" : "Aptikta"}</p>
       <ul className="mx-[6%] mt-[3%] space-y-[0.45em]">
         {fits ? (
-          <li className="flex items-center gap-[0.6em] rounded-[0.9em] bg-mint-soft px-[0.9em] py-[0.8em] text-[1em] font-semibold text-ink">
+          <li className="flex items-center gap-[0.6em] rounded-[0.9em] bg-brand-soft px-[0.9em] py-[0.8em] text-[1em] font-semibold text-brand-strong">
             <Check className="size-[1.1em] shrink-0" strokeWidth={3} />
             {anyFilter ? "Nerasta nieko, ko pasirinkai vengti" : "Nepasirinkai jokių filtrų"}
           </li>
@@ -349,13 +349,13 @@ function ResultScreen({ product, hits, anyFilter }: { product: Product; hits: Pa
                 <span className="block truncate text-[1em] font-extrabold text-ink">{h.text}</span>
                 <span className="text-[0.82em] text-muted">{h.kind}</span>
               </span>
-              <span className="shrink-0 rounded-full bg-grape-soft px-[0.7em] py-[0.25em] text-[0.8em] font-bold text-grape">Vengti</span>
+              <span className="shrink-0 rounded-full bg-danger-soft px-[0.7em] py-[0.25em] text-[0.8em] font-bold text-danger">Vengti</span>
             </li>
           ))
         )}
       </ul>
 
-      <div className="mx-[6%] mb-[8%] mt-auto rounded-full bg-ink py-[0.85em] text-center text-[1em] font-extrabold text-white">
+      <div className="mx-[6%] mb-[8%] mt-auto rounded-full bg-brand py-[0.85em] text-center text-[1em] font-extrabold text-white">
         Skenuoti kitą produktą
       </div>
     </>

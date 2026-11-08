@@ -9,14 +9,14 @@ const ROW_A = ["E priedai", "Konservantai", "Saldikliai", "Dažikliai", "Skonio 
 const ROW_B = ["Veganiška", "Vegetariška", "Be glitimo", "Be laktozės", "Druska", "Kofeinas", "Alkoholis", "Alergenai"];
 
 const GROUPS = [
-  { title: "E priedai", text: "Dažikliai, konservantai, saldikliai, stiprikliai. Po vieną arba visa grupė vienu paspaudimu.", tone: "grape" },
+  { title: "E priedai", text: "Dažikliai, konservantai, saldikliai, stiprikliai. Po vieną arba visa grupė vienu paspaudimu.", tone: "brand" },
   { title: "Mitybos tipas", text: "Veganiška, vegetariška, be glitimo, be laktozės.", tone: "mint" },
   { title: "Gyvenimo būdas", text: "Pridėtinis cukrus, druska, palmių aliejus, kofeinas, alkoholis.", tone: "ink" },
   { title: "Alergenai", text: "14 ES alergenų, jei tau to reikia.", tone: "white" },
 ] as const;
 
 const TONES = {
-  grape: "bg-grape text-white",
+  brand: "bg-brand text-white",
   mint: "bg-mint text-ink",
   ink: "bg-ink text-white",
   white: "bg-white text-ink ring-1 ring-inset ring-line",
@@ -24,13 +24,13 @@ const TONES = {
 
 export function Criteria() {
   return (
-    <section id="kriterijai" aria-labelledby="criteria-title" className="overflow-hidden bg-white py-20 lg:py-36">
+    <section id="kriterijai" aria-labelledby="criteria-title" className="overflow-hidden bg-paper py-20 lg:py-36">
       <div className="container-x">
         <Reveal className="mx-auto max-w-3xl text-center">
           <h2 id="criteria-title" className="display text-[clamp(2.4rem,6.4vw,5.5rem)] text-ink">
             Tavo kriterijai.
             <br />
-            <span className="text-grape">Tavo maistas.</span>
+            <span className="text-brand">Tavo maistas.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted">
             Pasirink, kas tau svarbu, o Skanis patikrins kiekvieną etiketę būtent pagal tai.
@@ -67,7 +67,7 @@ function Marquee({ items, className, accent = false }: { items: readonly string[
             key={i}
             className={cn(
               "whitespace-nowrap rounded-full px-6 py-3 text-lg font-extrabold sm:text-xl",
-              accent && i % 3 === 0 ? "bg-grape text-white" : i % 2 ? "bg-mint text-ink" : "bg-ink/[0.05] text-ink",
+              accent && i % 3 === 0 ? "bg-brand text-white" : i % 2 ? "bg-mint text-ink" : "bg-ink/[0.05] text-ink",
             )}
           >
             {item}

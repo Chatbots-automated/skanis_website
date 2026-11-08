@@ -70,7 +70,7 @@ export function StoreButtons({
             tone === "dark" ? "bg-ink text-white" : "bg-white text-ink",
           );
           return url ? (
-            <a key={key} href={url} target="_blank" rel="noopener" className={cn(base, "hover:-translate-y-0.5 hover:bg-grape hover:text-white")}>
+            <a key={key} href={url} target="_blank" rel="noopener" className={cn(base, "hover:-translate-y-0.5 hover:bg-brand hover:text-white")}>
               {inner}
             </a>
           ) : (

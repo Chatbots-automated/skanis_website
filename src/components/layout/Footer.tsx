@@ -11,7 +11,7 @@ const LEGAL_LINKS = [
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="bg-ink text-white" data-on-dark>
+    <footer className="bg-brand-deep text-white" data-on-dark>
       <div className="container-x py-12">
         <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <Link href="/" aria-label="Skanis – į pradžią" className="inline-block rounded-lg text-lg">

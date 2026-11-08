@@ -44,7 +44,7 @@ export function Steps() {
   const lift = useTransform(smooth, [0, 0.5, 1], [5, 0, 5]);
 
   return (
-    <section ref={ref} id="kaip-veikia" aria-labelledby="steps-title" className="relative h-[300svh] bg-white">
+    <section ref={ref} id="kaip-veikia" aria-labelledby="steps-title" className="relative h-[300svh] bg-paper">
       <h2 id="steps-title" className="sr-only">
         Kaip veikia Skanis: skenuok, pažink, vartok
       </h2>
@@ -53,7 +53,7 @@ export function Steps() {
           {/* phone */}
           <div className="order-2 flex justify-center [perspective:1400px] lg:order-1 lg:justify-end">
             <m.div style={{ rotateY: tilt, rotateX: lift }} className="relative">
-              <div aria-hidden="true" className="pointer-events-none absolute inset-[-14%] -z-10 rounded-full bg-[radial-gradient(closest-side,rgb(163_232_208/0.6),transparent)]" />
+              <div aria-hidden="true" className="pointer-events-none absolute inset-[-14%] -z-10 rounded-full bg-[radial-gradient(closest-side,rgb(159_223_196/0.6),transparent)]" />
               <Phone className="h-[min(46svh,620px)] sm:h-[min(58svh,620px)] lg:h-[min(78svh,660px)]">
                 <Screen show={active === 0}>
                   <ScanScreen />
@@ -93,9 +93,9 @@ export function Steps() {
                     className={cn(
                       "display relative grid size-16 shrink-0 place-items-center rounded-full border text-xl transition-colors duration-500",
                       i === active
-                        ? "border-grape bg-grape text-white"
+                        ? "border-brand bg-brand text-white"
                         : i < active
-                          ? "border-grape/40 bg-white text-grape"
+                          ? "border-brand/40 bg-white text-brand"
                           : "border-ink/10 bg-white text-ink/30",
                     )}
                   >
@@ -123,7 +123,7 @@ export function Steps() {
           <div className="order-1 lg:hidden">
             <ol className="flex gap-2">
               {STEPS.map((s, i) => (
-                <li key={s.word} className={cn("h-1 flex-1 rounded-full transition-colors duration-500", i <= active ? "bg-grape" : "bg-ink/10")}>
+                <li key={s.word} className={cn("h-1 flex-1 rounded-full transition-colors duration-500", i <= active ? "bg-brand" : "bg-ink/10")}>
                   <span className="sr-only">{s.word}</span>
                 </li>
               ))}
@@ -139,7 +139,7 @@ export function Steps() {
                   className="absolute inset-x-0 top-0"
                 >
                   <p className="display text-[clamp(1.8rem,8vw,2.1rem)] text-ink">
-                    <span className="mr-3 text-grape">0{i + 1}</span>
+                    <span className="mr-3 text-brand">0{i + 1}</span>
                     {s.word}
                   </p>
                   <p className="mt-2 text-[0.98rem] leading-relaxed text-muted sm:text-[1.02rem]">{s.text}</p>
@@ -200,7 +200,7 @@ function ScanScreen() {
         ].map((c) => (
           <span key={c} className={cn("absolute size-[14%] border-mint", c)} />
         ))}
-        <span className="absolute inset-x-[8%] h-[2px] animate-scan rounded-full bg-mint shadow-[0_0_14px_4px_rgb(163_232_208/0.7)]" />
+        <span className="absolute inset-x-[8%] h-[2px] animate-scan rounded-full bg-mint shadow-[0_0_14px_4px_rgb(159_223_196/0.7)]" />
         <p className="absolute inset-x-0 bottom-[8%] text-center text-[0.9em] font-semibold text-white/80">Skaitomi ingredientai…</p>
       </div>
       <div className="flex justify-center py-[7%]">
@@ -216,7 +216,7 @@ function AnalysisScreen() {
   return (
     <>
       <AppBar title="Rezultatas" />
-      <div className="mx-[6%] rounded-[1.4em] bg-grape p-[6%] text-white">
+      <div className="mx-[6%] rounded-[1.4em] bg-danger p-[6%] text-white">
         <p className="text-[0.8em] font-bold uppercase tracking-[0.14em] text-white/70">Rezultatas</p>
         <p className="mt-[0.2em] text-[2.3em] font-extrabold leading-none tracking-tight">Dėmesio</p>
         <p className="mt-[0.4em] text-[0.95em] text-white/80">Rasti 4 neatitikimai pagal tavo filtrus</p>
@@ -234,14 +234,14 @@ function AnalysisScreen() {
               <span className="block text-[1.05em] font-extrabold text-ink">{name}</span>
               <span className="text-[0.85em] text-muted">{kind}</span>
             </span>
-            <span className="rounded-full bg-grape-soft px-[0.7em] py-[0.25em] text-[0.8em] font-bold text-grape">Vengti</span>
+            <span className="rounded-full bg-danger-soft px-[0.7em] py-[0.25em] text-[0.8em] font-bold text-danger">Vengti</span>
           </li>
         ))}
       </ul>
       <p className="mx-[6%] mt-[5%] text-[0.88em] leading-[1.5] text-ink/70">
         {LABEL_PARTS.slice(1).map((part, i) =>
           HITS.has(part) ? (
-            <mark key={i} className="rounded bg-grape-soft px-[0.2em] font-bold text-grape">
+            <mark key={i} className="rounded bg-danger-soft px-[0.2em] font-bold text-danger">
               {part}
             </mark>
           ) : (
@@ -257,25 +257,25 @@ function VerdictScreen() {
   return (
     <>
       <AppBar title="Rezultatas" />
-      <div className="mx-[6%] flex flex-col items-center rounded-[1.4em] bg-mint px-[6%] py-[9%] text-center">
-        <span className="grid size-[3.4em] place-items-center rounded-full bg-ink text-mint">
+      <div className="mx-[6%] flex flex-col items-center rounded-[1.4em] bg-brand px-[6%] py-[9%] text-center text-white">
+        <span className="grid size-[3.4em] place-items-center rounded-full bg-white text-brand">
           <Check className="size-[1.8em]" strokeWidth={3} />
         </span>
-        <p className="mt-[0.6em] text-[2.6em] font-extrabold leading-none tracking-tight text-ink">Tinka</p>
-        <p className="mt-[0.4em] text-[0.95em] font-semibold text-ink/70">pagal tavo filtrus</p>
+        <p className="mt-[0.6em] text-[2.6em] font-extrabold leading-none tracking-tight">Tinka</p>
+        <p className="mt-[0.4em] text-[0.95em] font-semibold text-white/80">pagal tavo filtrus</p>
       </div>
       <p className="mx-[6%] mt-[7%] text-[0.85em] font-extrabold uppercase tracking-[0.12em] text-ink/50">Kodėl tinka?</p>
       <ul className="mx-[6%] mt-[3%] space-y-[0.6em]">
         {["Nerasta tavo pasirinktų E priedų", "Be saldiklių ir dažiklių", "Atitinka: vegetariška mityba"].map((t) => (
           <li key={t} className="flex items-center gap-[0.6em] text-[1em] font-semibold text-ink">
-            <span className="grid size-[1.5em] shrink-0 place-items-center rounded-full bg-mint-soft text-ink">
+            <span className="grid size-[1.5em] shrink-0 place-items-center rounded-full bg-brand-soft text-brand">
               <Check className="size-[0.9em]" strokeWidth={3} />
             </span>
             {t}
           </li>
         ))}
       </ul>
-      <div className="mx-[6%] mb-[9%] mt-auto rounded-full bg-ink py-[0.9em] text-center text-[1em] font-extrabold text-white">
+      <div className="mx-[6%] mb-[9%] mt-auto rounded-full bg-brand py-[0.9em] text-center text-[1em] font-extrabold text-white">
         Skenuoti kitą produktą
       </div>
     </>

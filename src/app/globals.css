@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 /*
- * Skanis design tokens, from the brand sheet:
- * mint #A3E8D0 (accent / alternative background), rich black #111111 (text),
- * deep Daitoku purple #5E2680 (contrast on mint), clean white #FFFFFF.
+ * Skanis design tokens, matched to the mobile app (mobile/src/theme.ts):
+ * deep forest green on warm ivory, the logo mint as accent,
+ * and red kept for the "doesn't fit" verdict only.
  */
 @theme inline {
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -12,17 +12,19 @@
 
 @theme {
   --color-white: #ffffff;
-  --color-paper: #ffffff;
-  --color-ink: #111111;
-  --color-muted: #55595b;
-  --color-faint: #6b7072;
-  --color-line: #e6e8e7;
+  --color-paper: #f7f5ef;
+  --color-ink: #16221b;
+  --color-muted: #5b6760;
+  --color-faint: #66726a;
+  --color-line: #e6e3da;
 
-  --color-mint: #a3e8d0;
-  --color-mint-soft: #dcf6ec;
+  --color-mint: #9fdfc4;
+  --color-mint-soft: #e2f4eb;
   --color-mint-deep: #5fc9a4;
-  --color-grape: #5e2680;
-  --color-grape-soft: #efe6f5;
+  --color-brand: #17694a;
+  --color-brand-strong: #0f5038;
+  --color-brand-deep: #0b3a29;
+  --color-brand-soft: #e7efe9;
 
   --color-danger: #b3382e;
   --color-danger-soft: #f9ebe8;
@@ -30,9 +32,9 @@
 
   --radius-card: 1.75rem;
 
-  --shadow-soft: 0 1px 2px rgb(17 17 17 / 0.04), 0 14px 34px -14px rgb(17 17 17 / 0.16);
-  --shadow-lift: 0 2px 4px rgb(17 17 17 / 0.05), 0 28px 60px -22px rgb(17 17 17 / 0.28);
-  --shadow-phone: 0 60px 100px -40px rgb(17 17 17 / 0.5), 0 18px 36px -18px rgb(17 17 17 / 0.3);
+  --shadow-soft: 0 1px 2px rgb(22 34 27 / 0.04), 0 14px 34px -14px rgb(22 34 27 / 0.16);
+  --shadow-lift: 0 2px 4px rgb(22 34 27 / 0.05), 0 28px 60px -22px rgb(22 34 27 / 0.28);
+  --shadow-phone: 0 60px 100px -40px rgb(22 34 27 / 0.5), 0 18px 36px -18px rgb(22 34 27 / 0.3);
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -84,7 +86,7 @@
   ::selection { background: var(--color-mint); color: var(--color-ink); }
 
   :focus-visible {
-    outline: 3px solid var(--color-grape);
+    outline: 3px solid var(--color-brand);
     outline-offset: 3px;
     border-radius: 0.5rem;
   }

@@ -59,9 +59,9 @@ export function SignupSection() {
   }
 
   return (
-    <section id="registracija" aria-labelledby="signup-title" className="bg-white px-3 pb-3 sm:px-4 sm:pb-4">
-      <div data-on-dark className="relative overflow-hidden rounded-[2rem] bg-ink px-6 py-16 text-white sm:px-12 lg:rounded-[2.75rem] lg:px-16 lg:py-24">
-        <div aria-hidden="true" className="absolute -right-32 -top-32 size-[28rem] rounded-full bg-grape/60 blur-3xl" />
+    <section id="registracija" aria-labelledby="signup-title" className="bg-paper px-3 pb-3 sm:px-4 sm:pb-4">
+      <div data-on-dark className="relative overflow-hidden rounded-[2rem] bg-brand-deep px-6 py-16 text-white sm:px-12 lg:rounded-[2.75rem] lg:px-16 lg:py-24">
+        <div aria-hidden="true" className="absolute -right-32 -top-32 size-[28rem] rounded-full bg-brand/70 blur-3xl" />
         <div aria-hidden="true" className="absolute -bottom-40 -left-24 size-[24rem] rounded-full bg-mint/25 blur-3xl" />
 
         <div className="relative mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_26rem] lg:items-center lg:gap-20">
@@ -141,7 +141,7 @@ export function SignupSection() {
                             aria-invalid={!!errors.email}
                             aria-describedby={errors.email ? "signup-email-error" : undefined}
                             className={cn(
-                              "h-14 w-full rounded-2xl border bg-paper pl-12 pr-4 text-base text-ink outline-none transition-[border-color,box-shadow] placeholder:text-faint focus:border-grape focus:shadow-[0_0_0_4px_rgb(163_232_208/0.6)]",
+                              "h-14 w-full rounded-2xl border bg-paper pl-12 pr-4 text-base text-ink outline-none transition-[border-color,box-shadow] placeholder:text-faint focus:border-brand focus:shadow-[0_0_0_4px_rgb(159_223_196/0.6)]",
                               errors.email ? "border-danger" : "border-line",
                             )}
                           />
@@ -173,7 +173,7 @@ export function SignupSection() {
                           <span
                             aria-hidden="true"
                             className={cn(
-                              "mt-0.5 grid size-6 shrink-0 place-items-center rounded-md border-2 bg-white text-transparent transition-all peer-checked:border-grape peer-checked:bg-grape peer-checked:text-white peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-grape",
+                              "mt-0.5 grid size-6 shrink-0 place-items-center rounded-md border-2 bg-white text-transparent transition-all peer-checked:border-brand peer-checked:bg-brand peer-checked:text-white peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand",
                               errors.consent ? "border-danger" : "border-ink/30",
                             )}
                           >
@@ -187,7 +187,7 @@ export function SignupSection() {
                               href="/privatumo-politika"
                               target="_blank"
                               rel="noopener"
-                              className="font-bold text-grape underline decoration-grape/30 decoration-2 underline-offset-2"
+                              className="font-bold text-brand underline decoration-brand/30 decoration-2 underline-offset-2"
                             >
                               privatumo politikoje
                             </Link>
@@ -219,7 +219,7 @@ export function SignupSection() {
                       <button
                         type="submit"
                         disabled={submitting}
-                        className="mt-7 inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-full bg-ink px-8 text-base font-bold text-white shadow-[0_10px_24px_-10px_rgb(17_17_17/0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-grape active:scale-[0.99] disabled:translate-y-0 disabled:opacity-80"
+                        className="mt-7 inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-full bg-brand px-8 text-base font-bold text-white shadow-[0_10px_24px_-10px_rgb(22_34_27/0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-strong active:scale-[0.99] disabled:translate-y-0 disabled:opacity-80"
                       >
                         {submitting ? (
                           <>

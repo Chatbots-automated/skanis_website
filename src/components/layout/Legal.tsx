@@ -35,11 +35,11 @@ export function LegalPage({
 }) {
   return (
     <article>
-      <header className="relative overflow-hidden bg-white pb-14 pt-28 sm:pt-32 lg:pb-20 lg:pt-40">
-        <div aria-hidden="true" className="absolute -right-40 -top-40 size-[36rem] rounded-full bg-[radial-gradient(closest-side,rgb(163_232_208/0.7),transparent)]" />
-        <div aria-hidden="true" className="absolute -bottom-56 left-[-10%] size-[30rem] rounded-full bg-[radial-gradient(closest-side,rgb(94_38_128/0.1),transparent)]" />
+      <header className="relative overflow-hidden bg-paper pb-14 pt-28 sm:pt-32 lg:pb-20 lg:pt-40">
+        <div aria-hidden="true" className="absolute -right-40 -top-40 size-[36rem] rounded-full bg-[radial-gradient(closest-side,rgb(159_223_196/0.7),transparent)]" />
+        <div aria-hidden="true" className="absolute -bottom-56 left-[-10%] size-[30rem] rounded-full bg-[radial-gradient(closest-side,rgb(23_105_74/0.1),transparent)]" />
         <div className="container-x relative">
-          <Link href="/" className="inline-flex items-center gap-2 text-sm font-bold text-ink/60 transition-colors hover:text-grape">
+          <Link href="/" className="inline-flex items-center gap-2 text-sm font-bold text-ink/60 transition-colors hover:text-brand">
             <ArrowLeft className="size-4" />
             Į pradžią
           </Link>
@@ -79,7 +79,7 @@ export function LegalPage({
               <ul className="mt-4 space-y-2.5 border-l border-line">
                 {sections.map((s) => (
                   <li key={s.id}>
-                    <a href={`#${s.id}`} className="-ml-px block border-l-2 border-transparent pl-4 text-sm leading-snug text-muted transition-colors hover:border-grape hover:text-ink">
+                    <a href={`#${s.id}`} className="-ml-px block border-l-2 border-transparent pl-4 text-sm leading-snug text-muted transition-colors hover:border-brand hover:text-ink">
                       {s.title}
                     </a>
                   </li>
@@ -97,7 +97,7 @@ export function LegalPage({
                 <ul className="mt-5 space-y-3">
                   {summary.items.map((t) => (
                     <li key={t} className="flex gap-3 leading-relaxed text-ink/85">
-                      <span aria-hidden="true" className="mt-[0.65em] size-1.5 shrink-0 rounded-full bg-grape" />
+                      <span aria-hidden="true" className="mt-[0.65em] size-1.5 shrink-0 rounded-full bg-brand" />
                       {t}
                     </li>
                   ))}
@@ -111,7 +111,7 @@ export function LegalPage({
                   <h2 id={`${s.id}-title`} className="text-[1.5rem] text-ink sm:text-[1.7rem]">
                     {s.title}
                   </h2>
-                  <div className="mt-5 space-y-4 leading-[1.8] text-ink/80 [&_a]:font-semibold [&_a]:text-grape [&_a]:underline [&_a]:decoration-grape/30 [&_a]:decoration-2 [&_a]:underline-offset-2 [&_h3]:mt-8 [&_h3]:text-[1.1rem] [&_h3]:tracking-[-0.01em] [&_h3]:text-ink [&_li]:pl-1 [&_li::marker]:text-grape [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6">
+                  <div className="mt-5 space-y-4 leading-[1.8] text-ink/80 [&_a]:font-semibold [&_a]:text-brand [&_a]:underline [&_a]:decoration-brand/30 [&_a]:decoration-2 [&_a]:underline-offset-2 [&_h3]:mt-8 [&_h3]:text-[1.1rem] [&_h3]:tracking-[-0.01em] [&_h3]:text-ink [&_li]:pl-1 [&_li::marker]:text-brand [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6">
                     {s.body}
                   </div>
                 </section>

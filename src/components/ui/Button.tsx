@@ -11,7 +11,7 @@ const base =
   "active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-ink text-white hover:-translate-y-0.5 hover:bg-grape hover:shadow-[0_16px_30px_-12px_rgb(94_38_128/0.6)]",
+  primary: "bg-brand text-white hover:-translate-y-0.5 hover:bg-brand-strong hover:shadow-[0_16px_30px_-12px_rgb(23_105_74/0.6)]",
   secondary: "border border-ink/15 bg-white/60 text-ink hover:-translate-y-0.5 hover:border-ink/40 hover:bg-white",
   mint: "bg-mint text-ink hover:-translate-y-0.5 hover:bg-white",
   light: "bg-white text-ink hover:-translate-y-0.5 hover:bg-mint",

@@ -4,12 +4,12 @@ import { FAQ } from "@/content/faq";
 /** Short FAQ on native <details>, so it works without JavaScript and every answer is in the HTML. */
 export function Faq() {
   return (
-    <section id="duk" aria-labelledby="faq-title" className="bg-white pb-24 lg:pb-32">
+    <section id="duk" aria-labelledby="faq-title" className="bg-paper pb-24 lg:pb-32">
       <div className="container-x grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
         <h2 id="faq-title" className="display text-[clamp(2.3rem,5vw,4rem)] text-ink">
           Dažni
           <br />
-          klausimai<span className="text-grape">.</span>
+          klausimai<span className="text-brand">.</span>
         </h2>
         <div className="border-t border-line">
           {FAQ.map((item) => (

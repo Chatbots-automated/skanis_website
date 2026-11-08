@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 /** Packshot-style drawings of the demo products (made-up brands). */
 export function ProductArt({ id, className }: { id: ProductId; className?: string }) {
   const Art = ART[id];
-  return <Art className={cn("h-full w-full drop-shadow-[0_12px_18px_rgb(17_17_17/0.18)]", className)} />;
+  return <Art className={cn("h-full w-full drop-shadow-[0_12px_18px_rgb(22_34_27/0.18)]", className)} />;
 }
 
 const ART: Record<ProductId, (p: { className?: string }) => React.ReactElement> = {
