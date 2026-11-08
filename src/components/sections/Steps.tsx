@@ -2,8 +2,8 @@
 
 import { useRef, useState } from "react";
 import { m, useMotionValueEvent, useScroll, useSpring, useTransform } from "motion/react";
-import { Check } from "lucide-react";
-import { AppBar, Phone } from "@/components/ui/Phone";
+import { Phone } from "@/components/ui/Phone";
+import { AppHeader, CameraScreen, CheckBullet, Footnote, Marked, ProductRow, ReasonPanel, ResultButtons, SectionTitle, VerdictHeading } from "@/components/demo/AppScreens";
 import { cn } from "@/lib/utils";
 
 const STEPS = [
@@ -44,7 +44,7 @@ export function Steps() {
   const lift = useTransform(smooth, [0, 0.5, 1], [5, 0, 5]);
 
   return (
-    <section ref={ref} id="kaip-veikia" aria-labelledby="steps-title" className="relative h-[300svh] bg-paper">
+    <section ref={ref} id="kaip-veikia" aria-labelledby="steps-title" className="relative h-[300svh] bg-brand-soft">
       <h2 id="steps-title" className="sr-only">
         Kaip veikia Skanis: skenuok, pažink, vartok
       </h2>
@@ -71,11 +71,11 @@ export function Steps() {
           {/* steps on an arc (desktop) */}
           <div className="relative order-1 hidden h-[min(36rem,72svh)] lg:order-2 lg:block">
             <svg aria-hidden="true" viewBox="0 0 120 600" preserveAspectRatio="none" className="absolute inset-y-0 left-0 h-full w-[7.5rem] overflow-visible">
-              <path d={ARC} fill="none" stroke="rgb(17 17 17 / 0.07)" strokeWidth="10" vectorEffect="non-scaling-stroke" strokeLinecap="round" />
+              <path d={ARC} fill="none" stroke="rgb(23 105 74 / 0.12)" strokeWidth="10" vectorEffect="non-scaling-stroke" strokeLinecap="round" />
               <m.path
                 d={ARC}
                 fill="none"
-                stroke="var(--color-mint-deep)"
+                stroke="var(--color-brand)"
                 strokeWidth="10"
                 vectorEffect="non-scaling-stroke"
                 strokeLinecap="round"
@@ -161,7 +161,7 @@ function Screen({ show, children }: { show: boolean; children: React.ReactNode }
       initial={false}
       animate={{ opacity: show ? 1 : 0, scale: show ? 1 : 0.97, y: show ? 0 : 12 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="absolute inset-0 flex flex-col pt-[14%] text-[clamp(9px,1.7svh,13px)]"
+      className="absolute inset-0 flex flex-col pt-[16%] text-[4.75cqw]"
     >
       {children}
     </m.div>
@@ -170,85 +170,56 @@ function Screen({ show, children }: { show: boolean; children: React.ReactNode }
 
 const LABEL_PARTS = [
   "Sudėtis: pienas, cukrus, braškės (8 %), ",
-  "modifikuotas krakmolas, ",
+  "modifikuotas krakmolas, stiprintuvas ",
   "E621",
-  ", stabilizatorius ",
-  "E450",
-  ", saldiklis ",
+  ", stabilizatorius E450, saldiklis ",
   "aspartamas",
   ", dažiklis ",
   "E129",
   ", jogurto kultūros.",
 ];
-const HITS = new Set(["E621", "E450", "aspartamas", "E129"]);
+
+const YOGURT_ART = (
+  <span className="grid size-full place-items-center rounded-[0.4em] bg-[#f6e9ee] text-[0.55em] font-extrabold leading-tight text-[#b4325d]">
+    BRAŠKIŲ
+    <br />
+    JOGURTAS
+  </span>
+);
 
 function ScanScreen() {
   return (
-    <>
-      <AppBar title="Nufotografuokite sudėtį" />
-      <div className="relative mx-[5%] flex-1 overflow-hidden rounded-[1.6em] bg-[#1d1d1f]">
-        <span className="absolute -left-[20%] top-[10%] size-[60%] rounded-full bg-[#e0485a]/50 blur-2xl" />
-        <span className="absolute -right-[20%] bottom-[5%] size-[60%] rounded-full bg-mint/40 blur-2xl" />
-        <div className="absolute inset-x-[10%] top-[24%] rotate-[-2deg] rounded-[0.8em] bg-white p-[7%] text-[0.92em] leading-[1.45] text-ink/80 shadow-lift">
-          {LABEL_PARTS.join("")}
-        </div>
-        {[
-          "left-[6%] top-[18%] border-l-[3px] border-t-[3px] rounded-tl-xl",
-          "right-[6%] top-[18%] border-r-[3px] border-t-[3px] rounded-tr-xl",
-          "left-[6%] bottom-[22%] border-b-[3px] border-l-[3px] rounded-bl-xl",
-          "right-[6%] bottom-[22%] border-b-[3px] border-r-[3px] rounded-br-xl",
-        ].map((c) => (
-          <span key={c} className={cn("absolute size-[14%] border-mint", c)} />
-        ))}
-        <span className="absolute inset-x-[8%] h-[2px] animate-scan rounded-full bg-mint shadow-[0_0_14px_4px_rgb(159_223_196/0.7)]" />
-        <p className="absolute inset-x-0 bottom-[8%] text-center text-[0.9em] font-semibold text-white/80">Skaitomi ingredientai…</p>
-      </div>
-      <div className="flex justify-center py-[7%]">
-        <span className="grid size-[3.6em] place-items-center rounded-full border-[3px] border-ink/15">
-          <span className="size-[2.7em] rounded-full bg-ink" />
-        </span>
-      </div>
-    </>
+    <CameraScreen
+      label={LABEL_PARTS.join("")}
+      backdrop={
+        <>
+          <span className="absolute -left-[20%] top-[18%] size-[60%] rounded-full bg-[#e0485a]/35 blur-2xl" />
+          <span className="absolute -right-[20%] bottom-[10%] size-[60%] rounded-full bg-mint/25 blur-2xl" />
+        </>
+      }
+    />
   );
 }
 
 function AnalysisScreen() {
   return (
     <>
-      <AppBar title="Rezultatas" />
-      <div className="mx-[6%] rounded-[1.4em] bg-danger p-[6%] text-white">
-        <p className="text-[0.8em] font-bold uppercase tracking-[0.14em] text-white/70">Rezultatas</p>
-        <p className="mt-[0.2em] text-[2.3em] font-extrabold leading-none tracking-tight">Dėmesio</p>
-        <p className="mt-[0.4em] text-[0.95em] text-white/80">Rasti 4 neatitikimai pagal tavo filtrus</p>
+      <AppHeader />
+      <div className="flex flex-col gap-[1.2em] px-[6%] pt-[3%]">
+        <ProductRow name="Braškių jogurtas" meta="400 g" art={YOGURT_ART} />
+        <VerdictHeading verdict="doesnt_match" summary="Aptikti 3 jūsų filtrai" />
+        <div className="space-y-[0.55em]">
+          <SectionTitle>Kodėl netinka?</SectionTitle>
+          <ReasonPanel verdict="doesnt_match" title="Saldikliai">
+            „…saldiklis <Marked verdict="doesnt_match">aspartamas</Marked>“
+          </ReasonPanel>
+          <ReasonPanel verdict="doesnt_match" title="Skonio stiprikliai">
+            „…stiprintuvas <Marked verdict="doesnt_match">E621</Marked>“
+          </ReasonPanel>
+          <p className="text-[0.85em] font-semibold text-brand">+1 kiti</p>
+        </div>
       </div>
-      <p className="mx-[6%] mt-[6%] text-[0.85em] font-extrabold uppercase tracking-[0.12em] text-ink/50">Aptikta</p>
-      <ul className="mx-[6%] mt-[3%] space-y-[0.5em]">
-        {[
-          ["E621", "Skonio stipriklis"],
-          ["E450", "Fosfatai"],
-          ["Aspartamas", "Saldiklis"],
-          ["E129", "Dažiklis"],
-        ].map(([name, kind]) => (
-          <li key={name} className="flex items-center justify-between rounded-[0.9em] border border-line px-[0.9em] py-[0.6em]">
-            <span>
-              <span className="block text-[1.05em] font-extrabold text-ink">{name}</span>
-              <span className="text-[0.85em] text-muted">{kind}</span>
-            </span>
-            <span className="rounded-full bg-danger-soft px-[0.7em] py-[0.25em] text-[0.8em] font-bold text-danger">Vengti</span>
-          </li>
-        ))}
-      </ul>
-      <p className="mx-[6%] mt-[5%] text-[0.88em] leading-[1.5] text-ink/70">
-        {LABEL_PARTS.slice(1).map((part, i) =>
-          HITS.has(part) ? (
-            <mark key={i} className="rounded bg-danger-soft px-[0.2em] font-bold text-danger">
-              {part}
-            </mark>
-          ) : (
-            <span key={i}>{part}</span>
-          ),
-        )}
-      </p>
+      <ResultButtons />
     </>
   );
 }
@@ -256,28 +227,18 @@ function AnalysisScreen() {
 function VerdictScreen() {
   return (
     <>
-      <AppBar title="Rezultatas" />
-      <div className="mx-[6%] flex flex-col items-center rounded-[1.4em] bg-brand px-[6%] py-[9%] text-center text-white">
-        <span className="grid size-[3.4em] place-items-center rounded-full bg-white text-brand">
-          <Check className="size-[1.8em]" strokeWidth={3} />
-        </span>
-        <p className="mt-[0.6em] text-[2.6em] font-extrabold leading-none tracking-tight">Tinka</p>
-        <p className="mt-[0.4em] text-[0.95em] font-semibold text-white/80">pagal tavo filtrus</p>
+      <AppHeader />
+      <div className="flex flex-col gap-[1.2em] px-[6%] pt-[3%]">
+        <ProductRow name="Natūralus jogurtas" meta="400 g" art={<span className="grid size-full place-items-center rounded-[0.4em] bg-[#eef3f8] text-[0.55em] font-extrabold leading-tight text-[#2f6690]">NATŪRALUS<br />JOGURTAS</span>} />
+        <VerdictHeading verdict="matches" summary="Nerasta nieko, ko pasirinkote vengti" />
+        <div className="space-y-[0.6em]">
+          <SectionTitle>Kodėl tinka?</SectionTitle>
+          <CheckBullet>Nerasta jūsų pasirinktų E priedų</CheckBullet>
+          <CheckBullet>Atitinka mitybos tipo, gyvenimo būdo ir kitų filtrų reikalavimus</CheckBullet>
+        </div>
+        <Footnote />
       </div>
-      <p className="mx-[6%] mt-[7%] text-[0.85em] font-extrabold uppercase tracking-[0.12em] text-ink/50">Kodėl tinka?</p>
-      <ul className="mx-[6%] mt-[3%] space-y-[0.6em]">
-        {["Nerasta tavo pasirinktų E priedų", "Be saldiklių ir dažiklių", "Atitinka: vegetariška mityba"].map((t) => (
-          <li key={t} className="flex items-center gap-[0.6em] text-[1em] font-semibold text-ink">
-            <span className="grid size-[1.5em] shrink-0 place-items-center rounded-full bg-brand-soft text-brand">
-              <Check className="size-[0.9em]" strokeWidth={3} />
-            </span>
-            {t}
-          </li>
-        ))}
-      </ul>
-      <div className="mx-[6%] mb-[9%] mt-auto rounded-full bg-brand py-[0.9em] text-center text-[1em] font-extrabold text-white">
-        Skenuoti kitą produktą
-      </div>
+      <ResultButtons />
     </>
   );
 }

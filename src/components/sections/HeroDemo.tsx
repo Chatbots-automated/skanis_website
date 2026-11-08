@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, m, useInView, useScroll, useSpring, useTransform } from "motion/react";
-import { Check, X } from "lucide-react";
+import { Check } from "lucide-react";
 import { ProductArt } from "@/components/demo/ProductArt";
-import { AppBar, Phone } from "@/components/ui/Phone";
+import { Phone } from "@/components/ui/Phone";
+import { AppHeader, CameraScreen, CheckBullet, Footnote, Marked, OtherFound, ProductRow, ReasonPanel, ResultButtons, SectionTitle, VerdictHeading } from "@/components/demo/AppScreens";
 import { DEFAULT_FILTERS, FILTERS, findHits, PRODUCTS, type FilterId, type Part, type Product, type ProductId } from "@/content/products";
 import { cn } from "@/lib/utils";
 
@@ -107,7 +108,7 @@ export function HeroDemo() {
               "bottom-0 left-0 border-b-4 border-l-4 rounded-bl-[1.4rem]",
               "bottom-0 right-0 border-b-4 border-r-4 rounded-br-[1.4rem]",
             ].map((c) => (
-              <span key={c} className={cn("absolute size-11 border-ink sm:size-16", c)} />
+              <span key={c} className={cn("absolute size-11 border-brand sm:size-16", c)} />
             ))}
           </m.div>
           <div aria-hidden="true" className="pointer-events-none absolute inset-[-25%] -z-10 rounded-full bg-[radial-gradient(closest-side,rgb(159_223_196/0.65),transparent)]" />
@@ -124,9 +125,9 @@ export function HeroDemo() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: scanning ? 0.2 : 0.45, ease }}
-                className="absolute inset-0 flex flex-col pt-[14%] text-[clamp(9.5px,1.6svh,12.5px)]"
+                className="absolute inset-0 flex flex-col pt-[16%] text-[4.75cqw]"
               >
-                {scanning ? <ScanScreen product={product} /> : <ResultScreen product={product} hits={hits} anyFilter={on.size > 0} />}
+                {scanning ? <ScanScreen product={product} /> : <ResultScreen product={product} hits={hits} on={on} />}
               </m.div>
             </AnimatePresence>
           </Phone>
@@ -216,7 +217,7 @@ function ProductPicker({
           onClick={() => onPick(p.id)}
           className={cn(
             "flex flex-col items-center gap-1.5 rounded-2xl px-1 pb-2 pt-3 transition-[background-color,box-shadow,transform] active:scale-95",
-            p.id === value ? "bg-mint-soft shadow-[inset_0_0_0_2px_var(--color-ink)]" : "bg-ink/[0.03] hover:bg-ink/[0.06]",
+            p.id === value ? "bg-brand-soft shadow-[inset_0_0_0_2px_var(--color-brand)]" : "bg-ink/[0.03] hover:bg-ink/[0.06]",
           )}
         >
           <span className={cn("block w-full", compact ? "h-14" : "h-16")}>
@@ -278,86 +279,82 @@ function Label({ parts, on, className }: { parts: Part[]; on: ReadonlySet<Filter
 
 function ScanScreen({ product }: { product: Product }) {
   return (
-    <>
-      <AppBar title="Nufotografuokite sudėtį" />
-      <div className="relative mx-[5%] flex-1 overflow-hidden rounded-[1.6em] bg-[#1d1d1f]">
-        {/* the pack, out of focus behind the label */}
-        <div className="absolute inset-x-0 top-[6%] flex h-[40%] justify-center opacity-60 blur-[2px]">
-          <ProductArt id={product.id} />
-        </div>
-        <div className="absolute inset-x-[8%] top-[34%] rotate-[-2deg] rounded-[0.8em] bg-white p-[6%] text-[0.85em] leading-[1.5] text-ink/80 shadow-lift">
+    <CameraScreen
+      label={
+        <>
           <span className="font-bold">Sudėtis: </span>
           {product.parts.map((p) => p.text).join("")}
+        </>
+      }
+      backdrop={
+        // the pack, out of focus behind the label
+        <div className="absolute inset-x-0 top-[8%] flex h-[46%] justify-center opacity-45 blur-[3px]">
+          <ProductArt id={product.id} />
         </div>
-        {[
-          "left-[5%] top-[30%] border-l-[3px] border-t-[3px] rounded-tl-xl",
-          "right-[5%] top-[30%] border-r-[3px] border-t-[3px] rounded-tr-xl",
-          "left-[5%] bottom-[12%] border-b-[3px] border-l-[3px] rounded-bl-xl",
-          "right-[5%] bottom-[12%] border-b-[3px] border-r-[3px] rounded-br-xl",
-        ].map((c) => (
-          <span key={c} className={cn("absolute size-[13%] border-mint", c)} />
-        ))}
-        <span className="absolute inset-x-[7%] h-[2px] animate-scan rounded-full bg-mint shadow-[0_0_14px_4px_rgb(159_223_196/0.7)]" />
-        <p className="absolute inset-x-0 bottom-[3.5%] text-center text-[0.9em] font-semibold text-white/80">Skaitomi ingredientai…</p>
-      </div>
-      <div className="flex justify-center py-[6%]">
-        <span className="grid size-[3.4em] place-items-center rounded-full border-[3px] border-ink/15">
-          <span className="size-[2.5em] rounded-full bg-ink" />
-        </span>
-      </div>
-    </>
+      }
+    />
   );
 }
 
-function ResultScreen({ product, hits, anyFilter }: { product: Product; hits: Part[]; anyFilter: boolean }) {
-  const fits = hits.length === 0;
+/** "Aptiktas 1 jūsų filtras" / "Aptikti 2 jūsų filtrai" / "Aptikta 10 jūsų filtrų", as the app says it. */
+function filtersFound(n: number) {
+  if (n % 10 === 1 && n % 100 !== 11) return `Aptiktas ${n} jūsų filtras`;
+  if (n % 10 === 0 || (n % 100 >= 11 && n % 100 <= 19)) return `Aptikta ${n} jūsų filtrų`;
+  return `Aptikti ${n} jūsų filtrai`;
+}
+
+const ADDITIVE_FILTERS: ReadonlySet<FilterId> = new Set(["saldikliai", "dazikliai", "stiprikliai"]);
+
+/** Why it fits, in the app's words for the kinds of filters that are on. */
+function fitReasons(on: ReadonlySet<FilterId>) {
+  const ids = [...on];
+  const lines: string[] = [];
+  if (ids.some((id) => ADDITIVE_FILTERS.has(id))) lines.push("Nerasta jūsų pasirinktų E priedų");
+  if (ids.some((id) => !ADDITIVE_FILTERS.has(id))) lines.push("Atitinka mitybos tipo, gyvenimo būdo ir kitų filtrų reikalavimus");
+  if (lines.length === 0) lines.push("Nepasirinkote jokių filtrų");
+  return lines;
+}
+
+/** The last couple of words before a hit, so the quote reads like the label: „…saldikliai: aspartamas“. */
+function leadIn(parts: Part[], hit: Part) {
+  const before = parts[parts.indexOf(hit) - 1]?.text ?? "";
+  const words = before.replace(/^[\s,;.]+/, "").split(/\s+/).filter(Boolean);
+  const tail = words.slice(-2).join(" ");
+  return tail ? `${words.length > 2 ? "…" : ""}${tail} ` : "";
+}
+
+function ResultScreen({ product, hits, on }: { product: Product; hits: Part[]; on: ReadonlySet<FilterId> }) {
+  const verdict = hits.length === 0 ? "matches" : "doesnt_match";
+  const groups = FILTERS.filter((f) => hits.some((h) => h.filter === f.id)).map((f) => ({ filter: f, hits: hits.filter((h) => h.filter === f.id) }));
+  const shown = groups.slice(0, 2);
+  // label words that other filters would catch: listed apart, as the app does
+  const others = new Set(product.parts.filter((p) => p.filter && !on.has(p.filter)).map((p) => p.text)).size;
   return (
     <>
-      <AppBar title="Rezultatas" />
-      <div className="mx-[6%] flex items-center gap-[0.8em] rounded-[1.2em] bg-ink/[0.03] p-[3.5%]">
-        <span className="grid h-[3.4em] w-[3.4em] shrink-0 place-items-center rounded-[0.8em] bg-white">
-          <span className="block h-[2.9em] w-[2.9em]">
-            <ProductArt id={product.id} className="drop-shadow-none" />
-          </span>
-        </span>
-        <span className="min-w-0 leading-tight">
-          <span className="block text-[0.8em] font-bold text-ink/50">{product.brand}</span>
-          <span className="line-clamp-2 block text-[1em] font-extrabold text-ink">{product.name}</span>
-        </span>
+      <AppHeader />
+      <div className="flex flex-col gap-[1.25em] px-[6%] pt-[3%]">
+        <ProductRow name={`${product.brand} ${product.name}`} meta={product.size} art={<ProductArt id={product.id} className="drop-shadow-none" />} />
+        <VerdictHeading verdict={verdict} summary={verdict === "matches" ? "Nerasta nieko, ko pasirinkote vengti" : filtersFound(groups.length)} />
+        <div className="space-y-[0.6em]">
+          <SectionTitle>{verdict === "matches" ? "Kodėl tinka?" : "Kodėl netinka?"}</SectionTitle>
+          {verdict === "matches"
+            ? fitReasons(on).map((line) => <CheckBullet key={line}>{line}</CheckBullet>)
+            : shown.map(({ filter, hits: found }) => (
+                <ReasonPanel key={filter.id} verdict={verdict} title={filter.label}>
+                  {found.map((h, i) => (
+                    <span key={h.text}>
+                      {i > 0 && " "}„{leadIn(product.parts, h)}
+                      <Marked verdict={verdict}>{h.text}</Marked>“
+                    </span>
+                  ))}
+                </ReasonPanel>
+              ))}
+          {groups.length > shown.length && <p className="text-[0.85em] font-semibold text-brand">+{groups.length - shown.length} kiti</p>}
+        </div>
+        {others > 0 && <OtherFound count={others} />}
+        <Footnote />
       </div>
-      <div className={cn("mx-[6%] mt-[4%] flex items-center gap-[0.9em] rounded-[1.4em] p-[5.5%]", fits ? "bg-brand text-white" : "bg-danger text-white")}>
-        <span className={cn("grid size-[2.9em] shrink-0 place-items-center rounded-full", "bg-white/15 text-white")}>
-          {fits ? <Check className="size-[1.5em]" strokeWidth={3} /> : <X className="size-[1.5em]" strokeWidth={3} />}
-        </span>
-        <span>
-          <span className="block text-[2em] font-extrabold leading-none tracking-tight">{fits ? "Tinka" : "Netinka"}</span>
-          <span className={cn("mt-[0.3em] block text-[0.92em]", "text-white/80")}>pagal tavo filtrus</span>
-        </span>
-      </div>
-
-      <p className="mx-[6%] mt-[6%] text-[0.82em] font-extrabold uppercase tracking-[0.12em] text-ink/45">{fits ? "Kodėl tinka?" : "Aptikta"}</p>
-      <ul className="mx-[6%] mt-[3%] space-y-[0.45em]">
-        {fits ? (
-          <li className="flex items-center gap-[0.6em] rounded-[0.9em] bg-brand-soft px-[0.9em] py-[0.8em] text-[1em] font-semibold text-brand-strong">
-            <Check className="size-[1.1em] shrink-0" strokeWidth={3} />
-            {anyFilter ? "Nerasta nieko, ko pasirinkai vengti" : "Nepasirinkai jokių filtrų"}
-          </li>
-        ) : (
-          hits.map((h) => (
-            <li key={h.text} className="flex items-center justify-between gap-2 rounded-[0.9em] border border-line px-[0.9em] py-[0.55em]">
-              <span className="min-w-0">
-                <span className="block truncate text-[1em] font-extrabold text-ink">{h.text}</span>
-                <span className="text-[0.82em] text-muted">{h.kind}</span>
-              </span>
-              <span className="shrink-0 rounded-full bg-danger-soft px-[0.7em] py-[0.25em] text-[0.8em] font-bold text-danger">Vengti</span>
-            </li>
-          ))
-        )}
-      </ul>
-
-      <div className="mx-[6%] mb-[8%] mt-auto rounded-full bg-brand py-[0.85em] text-center text-[1em] font-extrabold text-white">
-        Skenuoti kitą produktą
-      </div>
+      <ResultButtons />
     </>
   );
 }

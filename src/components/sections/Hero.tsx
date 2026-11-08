@@ -12,7 +12,7 @@ export function Hero() {
       {/* a faint label-paper dot grid that fades out toward the edges */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[75rem] bg-[radial-gradient(rgb(22_34_27/0.07)_1px,transparent_1.5px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_60%_55%_at_50%_45%,#000,transparent)]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[75rem] bg-[radial-gradient(rgb(23_105_74/0.13)_1px,transparent_1.5px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_60%_55%_at_50%_45%,#000,transparent)]"
       />
 
       <div className="container-x relative flex flex-col items-center text-center">
@@ -38,7 +38,7 @@ export function Hero() {
         >
           Skenuok ir pažink
           <br />
-          maistą<span className="text-brand">.</span>
+          <span className="text-brand">maistą.</span>
         </m.h1>
 
         <m.p

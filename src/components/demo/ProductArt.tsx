@@ -1,31 +1,34 @@
+import { useId } from "react";
 import type { ProductId } from "@/content/products";
 import { cn } from "@/lib/utils";
 
 /** Packshot-style drawings of the demo products (made-up brands). */
 export function ProductArt({ id, className }: { id: ProductId; className?: string }) {
   const Art = ART[id];
-  return <Art className={cn("h-full w-full drop-shadow-[0_12px_18px_rgb(22_34_27/0.18)]", className)} />;
+  // each drawing gets its own gradient ids: a shared id resolves to the first copy in the page, and when that copy is hidden the gradient doesn't paint
+  const uid = useId().replace(/[^a-zA-Z0-9_-]/g, "");
+  return <Art uid={uid} className={cn("h-full w-full drop-shadow-[0_12px_18px_rgb(22_34_27/0.18)]", className)} />;
 }
 
-const ART: Record<ProductId, (p: { className?: string }) => React.ReactElement> = {
-  cola: ({ className }) => (
+const ART: Record<ProductId, (p: { className?: string; uid: string }) => React.ReactElement> = {
+  cola: ({ className, uid }) => (
     <svg viewBox="0 0 120 210" aria-hidden="true" className={className}>
       <defs>
-        <linearGradient id="can-body" x1="0" x2="1">
+        <linearGradient id={`${uid}-can-body`} x1="0" x2="1">
           <stop offset="0" stopColor="#0d0d0d" />
           <stop offset="0.28" stopColor="#3b3b3b" />
           <stop offset="0.42" stopColor="#1a1a1a" />
           <stop offset="1" stopColor="#050505" />
         </linearGradient>
-        <linearGradient id="can-metal" x1="0" x2="1">
+        <linearGradient id={`${uid}-can-metal`} x1="0" x2="1">
           <stop offset="0" stopColor="#9a9a9a" />
           <stop offset="0.35" stopColor="#f2f2f2" />
           <stop offset="1" stopColor="#7d7d7d" />
         </linearGradient>
       </defs>
-      <path d="M22 18c0-6 6-10 38-10s38 4 38 10l4 14v148l-4 14c0 6-6 10-38 10s-38-4-38-10l-4-14V32z" fill="url(#can-body)" />
-      <path d="M22 18c0-6 6-10 38-10s38 4 38 10l3 10H19z" fill="url(#can-metal)" />
-      <path d="M19 182h82l-3 12c0 6-6 10-38 10s-38-4-38-10z" fill="url(#can-metal)" />
+      <path d="M22 18c0-6 6-10 38-10s38 4 38 10l4 14v148l-4 14c0 6-6 10-38 10s-38-4-38-10l-4-14V32z" fill={`url(#${uid}-can-body)`} />
+      <path d="M22 18c0-6 6-10 38-10s38 4 38 10l3 10H19z" fill={`url(#${uid}-can-metal)`} />
+      <path d="M19 182h82l-3 12c0 6-6 10-38 10s-38-4-38-10z" fill={`url(#${uid}-can-metal)`} />
       <path d="M18 92c22-14 52 10 84-6v22c-32 16-62-8-84 6z" fill="#e3263a" />
       <text x="60" y="78" textAnchor="middle" fontFamily="system-ui, sans-serif" fontWeight="900" fontSize="22" fill="#fff" letterSpacing="1">
         BURBU
@@ -39,10 +42,10 @@ const ART: Record<ProductId, (p: { className?: string }) => React.ReactElement> 
       <rect x="30" y="30" width="7" height="150" rx="3.5" fill="#fff" opacity="0.14" />
     </svg>
   ),
-  traskuciai: ({ className }) => (
+  traskuciai: ({ className, uid }) => (
     <svg viewBox="0 0 160 210" aria-hidden="true" className={className}>
       <defs>
-        <linearGradient id="bag-body" x1="0" x2="1">
+        <linearGradient id={`${uid}-bag-body`} x1="0" x2="1">
           <stop offset="0" stopColor="#e8a317" />
           <stop offset="0.35" stopColor="#ffd24a" />
           <stop offset="0.7" stopColor="#f5b928" />
@@ -51,7 +54,7 @@ const ART: Record<ProductId, (p: { className?: string }) => React.ReactElement> 
       </defs>
       <path
         d="M14 16h132l-2 8c8 30 8 132 0 162l2 8H14l2-8c-8-30-8-132 0-162z"
-        fill="url(#bag-body)"
+        fill={`url(#${uid}-bag-body)`}
       />
       <path d="M14 16h132l-2 8H16zM14 194h132l-2-8H16z" fill="#b97a08" opacity="0.5" />
       <path d="M14 16l6 6 6-6 6 6 6-6 6 6 6-6 6 6 6-6 6 6 6-6 6 6 6-6 6 6 6-6 6 6 6-6 6 6 6-6 6 6 6-6 6 6 6-6" fill="none" stroke="#b97a08" strokeWidth="1.5" opacity="0.6" />
@@ -71,15 +74,15 @@ const ART: Record<ProductId, (p: { className?: string }) => React.ReactElement> 
       <rect x="22" y="28" width="8" height="150" rx="4" fill="#fff" opacity="0.18" />
     </svg>
   ),
-  sausainiai: ({ className }) => (
+  sausainiai: ({ className, uid }) => (
     <svg viewBox="0 0 200 210" aria-hidden="true" className={className}>
       <defs>
-        <linearGradient id="box-body" x1="0" x2="0" y1="0" y2="1">
+        <linearGradient id={`${uid}-box-body`} x1="0" x2="0" y1="0" y2="1">
           <stop offset="0" stopColor="#3a6fd1" />
           <stop offset="1" stopColor="#1f4aa0" />
         </linearGradient>
       </defs>
-      <rect x="10" y="40" width="180" height="140" rx="14" fill="url(#box-body)" />
+      <rect x="10" y="40" width="180" height="140" rx="14" fill={`url(#${uid}-box-body)`} />
       <text x="100" y="74" textAnchor="middle" fontFamily="system-ui, sans-serif" fontWeight="900" fontSize="24" fill="#fff" letterSpacing="1">
         TRAŠKA
       </text>

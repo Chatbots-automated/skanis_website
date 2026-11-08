@@ -16,23 +16,23 @@ const GROUPS = [
 ] as const;
 
 const TONES = {
-  brand: "bg-brand text-white",
-  mint: "bg-mint text-ink",
-  ink: "bg-ink text-white",
-  white: "bg-white text-ink ring-1 ring-inset ring-line",
+  brand: "bg-brand text-white ring-1 ring-inset ring-white/10",
+  mint: "bg-mint text-brand-deep",
+  ink: "bg-paper text-ink",
+  white: "bg-white/[0.06] text-white ring-1 ring-inset ring-white/15",
 } as const;
 
 export function Criteria() {
   return (
-    <section id="kriterijai" aria-labelledby="criteria-title" className="overflow-hidden bg-paper py-20 lg:py-36">
+    <section id="kriterijai" aria-labelledby="criteria-title" data-on-dark className="overflow-hidden bg-brand-deep py-20 text-white lg:py-36">
       <div className="container-x">
         <Reveal className="mx-auto max-w-3xl text-center">
-          <h2 id="criteria-title" className="display text-[clamp(2.4rem,6.4vw,5.5rem)] text-ink">
+          <h2 id="criteria-title" className="display text-[clamp(2.4rem,6.4vw,5.5rem)] text-white">
             Tavo kriterijai.
             <br />
-            <span className="text-brand">Tavo maistas.</span>
+            <span className="text-mint">Tavo maistas.</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted">
+          <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/70">
             Pasirink, kas tau svarbu, o Skanis patikrins kiekvieną etiketę būtent pagal tai.
           </p>
         </Reveal>
@@ -67,7 +67,7 @@ function Marquee({ items, className, accent = false }: { items: readonly string[
             key={i}
             className={cn(
               "whitespace-nowrap rounded-full px-6 py-3 text-lg font-extrabold sm:text-xl",
-              accent && i % 3 === 0 ? "bg-brand text-white" : i % 2 ? "bg-mint text-ink" : "bg-ink/[0.05] text-ink",
+              accent && i % 3 === 0 ? "bg-mint text-brand-deep" : i % 2 ? "bg-brand text-white" : "bg-white/[0.07] text-white/90",
             )}
           >
             {item}
